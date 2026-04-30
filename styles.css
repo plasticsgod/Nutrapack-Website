@@ -1170,3 +1170,19 @@ img, svg { display: block; max-width: 100%; }
   color: oklch(0.65 0.01 80);
   margin-top: 4px;
 }
+
+/* ===========================================
+   HEADER LOGO IMAGE
+   =========================================== */
+.site-header__logo {
+  height: 36px;
+  width: auto;
+  display: block;
+  /* Smooth out edges if logo has slight aliasing */
+  image-rendering: auto;
+}
+@media (max-width: 700px) {
+  .site-header__logo {
+    height: 30px;
+  }
+}
