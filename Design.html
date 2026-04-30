@@ -184,8 +184,11 @@
     position: sticky; top: 0; z-index: 50;
     display: flex; align-items: center; gap: clamp(16px, 3vw, 40px);
     padding: 8px clamp(20px, 4vw, 56px);
+    min-height: 96px;
     background: var(--bg);
     border-bottom: 1px solid var(--hairline);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
   }
   .np-header__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); flex-shrink: 0; }
   .np-header__star {
@@ -210,6 +213,7 @@
                 transform 200ms ease;
   }
   .np-header__cta:hover { transform: translateY(-1px); }
+  .np-header__cta-arrow { font-size: 16px; line-height: 1; }
   /* Burger button (only visible on mobile) */
   .np-header__burger {
     display: none;
@@ -255,7 +259,7 @@
       font-size: 12px;
       margin-left: auto;
     }
-    .np-header__cta span { display: none; }
+    .np-header__cta-arrow { display: none; }
     .np-header__burger { display: flex; }
     .np-header__logo { height: 60px; }
   }
@@ -312,7 +316,7 @@
     <a href="how-it-works.html" class="np-header__link">How It Works</a>
     <a href="about.html" class="np-header__link">About us</a>
   </nav>
-  <a href="contact.html" class="np-header__cta">Contact us<span>→</span></a>
+  <a href="contact.html" class="np-header__cta">Contact us<span class="np-header__cta-arrow">→</span></a>
   <button class="np-header__burger" aria-label="Menu" id="np-burger">
     <span></span><span></span><span></span>
   </button>

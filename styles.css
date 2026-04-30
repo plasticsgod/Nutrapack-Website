@@ -929,6 +929,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   gap: clamp(16px, 3vw, 40px);
   padding: 8px clamp(20px, 4vw, 56px);
+  min-height: 96px;
   background: var(--bg);
   border-bottom: 1px solid var(--hairline);
   -webkit-backdrop-filter: blur(8px);
@@ -1333,6 +1334,33 @@ img, svg { display: block; max-width: 100%; }
   .quote-row {
     flex-direction: column;
     gap: 16px;
+  }
+  /* Prevent form clipping on mobile */
+  .quote-form {
+    padding: 24px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .quote-field {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .quote-field input,
+  .quote-field select,
+  .quote-field textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    /* iOS adds default styling that can overflow */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  /* Restore the dropdown chevron after appearance:none kills it */
+  .quote-field select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 24px;
   }
 
   /* Footer columns → 1 column on small phones */
