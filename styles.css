@@ -1118,3 +1118,55 @@ img, svg { display: block; max-width: 100%; }
   .site-footer__cols { grid-template-columns: 1fr; }
   .site-footer__bottom { flex-wrap: wrap; }
 }
+/* ===========================================
+   DESIGN YOUR TUB CTA — homepage block
+   =========================================== */
+.design-cta {
+  padding: clamp(80px, 10vw, 140px) var(--pad);
+  text-align: center;
+}
+.design-cta__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.design-cta__title {
+  font-family: var(--display);
+  font-size: clamp(48px, 9vw, 140px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 8px 0 0;
+}
+.design-cta__title em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  text-transform: none;
+  letter-spacing: -0.03em;
+}
+.design-cta__lede {
+  font-family: var(--ui);
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.55;
+  color: oklch(0.85 0.01 80);
+  max-width: 56ch;
+  margin: 0;
+}
+.design-cta__btn {
+  margin-top: 12px;
+  font-size: 16px;
+  padding: 18px 32px;
+}
+.design-cta__small {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: oklch(0.65 0.01 80);
+  margin-top: 4px;
+}
