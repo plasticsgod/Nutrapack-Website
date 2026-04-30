@@ -554,6 +554,22 @@
   // 3. Footer year
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // 4. Accent color rotation — bold variety palette, smooth 2s cycle
+  // The CSS already has 1.2s transitions on all accent elements,
+  // so swapping --accent here fades buttons, italics, highlights, etc.
+  var accentColors = [
+    '#ff5b1f',  // orange
+    '#1f6bff',  // blue
+    '#2bb673',  // green
+    '#e83a3a',  // red
+    '#8a4dff'   // purple
+  ];
+  var accentIndex = 0;
+  setInterval(function(){
+    accentIndex = (accentIndex + 1) % accentColors.length;
+    document.documentElement.style.setProperty('--accent', accentColors[accentIndex]);
+  }, 2000);
 })();
 </script>
 
