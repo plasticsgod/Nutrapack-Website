@@ -331,6 +331,20 @@
   // Footer year
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Accent color rotation — same as homepage, smooth 2s cycle
+  var accentColors = [
+    '#ff5b1f',  // orange
+    '#1f6bff',  // blue
+    '#2bb673',  // green
+    '#e83a3a',  // red
+    '#8a4dff'   // purple
+  ];
+  var accentIndex = 0;
+  setInterval(function(){
+    accentIndex = (accentIndex + 1) % accentColors.length;
+    document.documentElement.style.setProperty('--accent', accentColors[accentIndex]);
+  }, 2000);
 })();
 </script>
 
