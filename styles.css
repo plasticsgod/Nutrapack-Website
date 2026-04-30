@@ -21,7 +21,7 @@
   --accent-tx: background-color 1200ms cubic-bezier(.4,0,.2,1), color 1200ms cubic-bezier(.4,0,.2,1), border-color 1200ms cubic-bezier(.4,0,.2,1), fill 1200ms cubic-bezier(.4,0,.2,1);
 }
 
-/* Smooth color transitions for ALL accent-driven elements */
+/* Smooth color transitions for ALL accent-driven elements (every page) */
 .hero__chip,
 .hero__cta-side,
 .section--accent,
@@ -36,7 +36,26 @@
 .quote-left h3 em,
 .hero__eyebrow .star,
 .section__kicker .star,
-.quote-bullets li::before {
+.quote-bullets li::before,
+/* About / Contact / How It Works page elements */
+.about-hero h1 em,
+.about-hero__eyebrow .star,
+.about-block h2 em,
+.values__kicker .star,
+.value__num,
+.contact-hero h1 em,
+.contact-hero__eyebrow .star,
+.contact-info__value a,
+.hiw-hero h1 em,
+.hiw-hero__eyebrow .star,
+.hiw-step__num,
+.hiw-step__title em,
+.hiw-end h2 em,
+/* Site-wide elements */
+.site-header__cta,
+.site-header__star,
+.site-footer__star,
+.site-header__link::after {
   transition: var(--accent-tx);
 }
 
@@ -909,7 +928,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   gap: clamp(16px, 3vw, 40px);
-  padding: 18px clamp(20px, 4vw, 56px);
+  padding: 8px clamp(20px, 4vw, 56px);
   background: var(--bg);
   border-bottom: 1px solid var(--hairline);
   -webkit-backdrop-filter: blur(8px);
@@ -1175,7 +1194,7 @@ img, svg { display: block; max-width: 100%; }
    HEADER LOGO IMAGE
    =========================================== */
 .site-header__logo {
-  height: 48px;
+  height: 80px;
   width: auto;
   display: block;
   /* Smooth out edges if logo has slight aliasing */
@@ -1183,6 +1202,6 @@ img, svg { display: block; max-width: 100%; }
 }
 @media (max-width: 700px) {
   .site-header__logo {
-    height: 40px;
+    height: 60px;
   }
 }
