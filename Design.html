@@ -201,7 +201,9 @@
     background: var(--accent); color: #0e0d0c; text-decoration: none;
     font-family: var(--ui); font-weight: 600; font-size: 14px;
     padding: 11px 18px; border: 1px solid var(--hairline);
-    transition: transform 200ms ease;
+    transition: background 1200ms cubic-bezier(.4,0,.2,1),
+                background-color 1200ms cubic-bezier(.4,0,.2,1),
+                transform 200ms ease;
   }
   .np-header__cta:hover { transform: translateY(-1px); }
   @media (max-width: 820px) {
