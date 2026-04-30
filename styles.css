@@ -1175,7 +1175,7 @@ img, svg { display: block; max-width: 100%; }
    HEADER LOGO IMAGE
    =========================================== */
 .site-header__logo {
-  height: 36px;
+  height: 48px;
   width: auto;
   display: block;
   /* Smooth out edges if logo has slight aliasing */
@@ -1183,6 +1183,6 @@ img, svg { display: block; max-width: 100%; }
 }
 @media (max-width: 700px) {
   .site-header__logo {
-    height: 30px;
+    height: 40px;
   }
 }
