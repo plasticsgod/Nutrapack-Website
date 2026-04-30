@@ -18,7 +18,7 @@
   --maxw: 1440px;
   --pad: clamp(20px, 4vw, 56px);
 
-  --accent-tx: background-color 1200ms cubic-bezier(.4,0,.2,1), color 1200ms cubic-bezier(.4,0,.2,1), border-color 1200ms cubic-bezier(.4,0,.2,1), fill 1200ms cubic-bezier(.4,0,.2,1);
+  --accent-tx: background-color 1200ms cubic-bezier(.4,0,.2,1), background 1200ms cubic-bezier(.4,0,.2,1), color 1200ms cubic-bezier(.4,0,.2,1), border-color 1200ms cubic-bezier(.4,0,.2,1), fill 1200ms cubic-bezier(.4,0,.2,1);
 }
 
 /* Smooth color transitions for ALL accent-driven elements (every page) */
