@@ -52,6 +52,19 @@
     width: 100%;
     height: 100vh;
   }
+  /* On mobile the 100vh canvas leaves big gaps above/below the tubs.
+     Centering the canvas with reduced height inside a still-100vh
+     sticky container fills the visible area better. */
+  @media (max-width: 700px) {
+    .tub-reveal__stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #tubRevealCanvas {
+      height: 65vh; /* tubs fill more of the visible area */
+    }
+  }
   #tubRevealCanvas {
     width: 100%;
     height: 100%;
@@ -810,30 +823,53 @@
   // ===================================================================
   // Strategy:
   //   - Wide (desktop, aspect >= 1.4): use full ARC_RADIUS_BASE (5.5),
-  //     camera distance comes mostly from horizontal fit.
-  //   - Square-ish (tablet, 0.8 to 1.4): keep arc radius, balance fits.
-  //   - Portrait (mobile, < 0.8): compress arc radius down to ~2.8 so the
-  //     fan fits in the narrow viewport without the camera pulling so far
-  //     back that the tubs become a tiny stripe in a sea of empty space.
+  //     symmetric half-circle, generous framing.
+  //   - Portrait (mobile, < 0.8): compress arc radius AND tighten framing
+  //     so the tubs fill more of the viewport. Increase angle separation
+  //     between inner and outer tubs so all 5 colors stay visible.
   //
-  // The arc is recomputed on every resize so the layout responds to
-  // orientation changes and window resizes.
+  // The arc and angles are recomputed on every resize so the layout
+  // responds to orientation changes and window resizes.
   var TUB_RADIUS = (TUB.diameter / 2) * MM;
   var FOV_RAD = 38 * Math.PI / 180;
-  var FRAMING_MARGIN = 1.25;
 
-  function computeAdaptiveArcRadius(aspect) {
-    // Smoothly scale arc radius based on aspect ratio.
-    //   aspect 1.4+ (landscape):  full radius (5.5)
-    //   aspect 0.8 (square):      ~85% (4.7)
-    //   aspect 0.5 (portrait):    ~52% (2.85)
-    //   aspect 0.4 (narrow phone): ~45% (2.5)
-    if (aspect >= 1.4) return ARC_RADIUS_BASE;
-    if (aspect <= 0.4) return ARC_RADIUS_BASE * 0.45;
-    // Linear interp between aspect 0.4 (0.45x) and 1.4 (1.0x)
-    var t = (aspect - 0.4) / (1.4 - 0.4);
-    var scale = 0.45 + (1.0 - 0.45) * t;
-    return ARC_RADIUS_BASE * scale;
+  // Effective angles get rewritten in resize() based on viewport.
+  // On desktop they stay at FAN_ANGLES_DEG; on mobile we adjust them.
+  var effectiveAngles = FAN_ANGLES_DEG.slice();
+
+  function computeAdaptiveLayout(aspect) {
+    // Returns { arcRadius, angles, framingMargin }
+    if (aspect >= 1.4) {
+      // Desktop: full half-circle, generous margin, all 5 tubs visible
+      return {
+        arcRadius: ARC_RADIUS_BASE,
+        angles: [-90, -35, 0, 35, 90],
+        framingMargin: 1.25
+      };
+    }
+    if (aspect <= 0.55) {
+      // Narrow mobile portrait: tight arc but with WIDE inner angles so
+      // the inner tubs actually clear the hero's silhouette. The yellow
+      // tub at 0° gets pushed extra far back so it peeks above the hero
+      // (since x=0 means it's hidden behind in X). Aggressive framing
+      // margin (0.95) means the tubs FILL the viewport with no big gaps.
+      return {
+        arcRadius: 2.4,
+        angles: [-75, -45, 0, 45, 75],
+        framingMargin: 0.95
+      };
+    }
+    // Tablet / square (between 0.55 and 1.4): smooth interpolation
+    var t = (aspect - 0.55) / (1.4 - 0.55);
+    var arcR = 2.4 + (ARC_RADIUS_BASE - 2.4) * t;
+    var outerAng = 75 + (90 - 75) * t;
+    var innerAng = 45 + (35 - 45) * t;
+    var margin = 0.95 + (1.25 - 0.95) * t;
+    return {
+      arcRadius: arcR,
+      angles: [-outerAng, -innerAng, 0, innerAng, outerAng],
+      framingMargin: margin
+    };
   }
 
   function distanceToFitVertical(halfH) {
@@ -851,13 +887,22 @@
     var aspect = w / h;
     camera.aspect = aspect;
 
-    // Recompute arc radius to fit current viewport aspect.
-    ARC_RADIUS = computeAdaptiveArcRadius(aspect);
+    // Recompute layout for current viewport
+    var layout = computeAdaptiveLayout(aspect);
+    ARC_RADIUS = layout.arcRadius;
+    effectiveAngles = layout.angles;
+    var FRAMING_MARGIN = layout.framingMargin;
+
+    // Update each fan tub's angleDeg + isCenter to match new layout
+    fanTubs.forEach(function(tub, i){
+      tub.angleDeg = effectiveAngles[i];
+      tub.isCenter = effectiveAngles[i] === 0;
+    });
 
     // World-space bounds of the fanned-out scene at current arc radius.
-    var maxAbsAngle = Math.max.apply(null, FAN_ANGLES_DEG.map(function(a){ return Math.abs(a); }));
+    var maxAbsAngle = Math.max.apply(null, effectiveAngles.map(function(a){ return Math.abs(a); }));
     var fanHalfWidth = Math.abs(Math.sin(maxAbsAngle * Math.PI / 180) * ARC_RADIUS) + TUB_RADIUS;
-    var fanHeight = TUB_TOTAL_HEIGHT + HERO_LIFT + 0.6;
+    var fanHeight = TUB_TOTAL_HEIGHT + HERO_LIFT + 0.4;
 
     var distV = distanceToFitVertical((fanHeight / 2) * FRAMING_MARGIN);
     var distH = distanceToFitHorizontal(fanHalfWidth * FRAMING_MARGIN, aspect);
