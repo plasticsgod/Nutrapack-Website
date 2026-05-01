@@ -406,7 +406,7 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--display);
   font-weight: 400;
   font-size: clamp(40px, 6.5vw, 104px);
-  line-height: 1.02;
+  line-height: 1.2;
   letter-spacing: -0.025em;
   margin: 16px 0 0;
   text-transform: uppercase;
@@ -1161,7 +1161,7 @@ img, svg { display: block; max-width: 100%; }
 .design-cta__title {
   font-family: var(--display);
   font-size: clamp(48px, 9vw, 140px);
-  line-height: 1.15;
+  line-height: 1.25;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   margin: 8px 0 0;
