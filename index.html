@@ -59,6 +59,15 @@
     .tub-reveal {
       height: 130vh;
     }
+    /* Move the hint up close to the tubs so it never overlaps the
+       dark section below. On mobile, the sticky stage scrolls past
+       its bottom edge near where the next section begins, which would
+       cause a hint at "bottom: 40-80px" to render on top of the dark
+       background. Anchoring to top instead keeps it tied to the tubs. */
+    .tub-reveal__hint {
+      bottom: auto;
+      top: 65vh;
+    }
   }
   #tubRevealCanvas {
     width: 100%;
