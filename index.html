@@ -14,6 +14,50 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css?v=10">
+
+<style>
+  /* ============================================================
+     TUB REVEAL — 3D scroll-driven fan-out animation
+     Matches the site's cream/ink/accent system. The animation logic
+     lives in a script block at the bottom of <body>.
+     ============================================================ */
+  .tub-reveal {
+    /* 300vh runway = generous scroll distance for the cinematic reveal.
+       Reduce to 200vh if it feels too long. */
+    position: relative;
+    width: 100%;
+    height: 300vh;
+    background: var(--bg);
+    border-bottom: 1px solid var(--hairline);
+  }
+  /* Intro copy sits at the top of the section, before the sticky stage.
+     It scrolls past normally as the user enters the runway. */
+  .tub-reveal__intro {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(96px, 11vw, 180px) var(--pad) clamp(40px, 5vw, 60px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .tub-reveal__intro .section__h2 {
+    margin-top: 8px;
+  }
+  /* Sticky stage holds the 3D canvas pinned to the viewport while the
+     user scrolls through the runway. */
+  .tub-reveal__stage {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+  }
+  #tubRevealCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>
 </head>
 <body>
 
@@ -335,6 +379,22 @@
     </div>
   </section>
 
+  <!-- ============ TUB REVEAL ANIMATION (3D scroll-driven fan-out) ============ -->
+  <section class="tub-reveal" id="tub-reveal">
+    <!-- This section creates a 300vh-tall scroll runway. The sticky stage
+         inside pins to the viewport while the user scrolls through it,
+         and scroll position drives the 3D fan-out animation below. -->
+    <div class="tub-reveal__intro">
+      <div class="section__kicker"><span class="star"></span>Every shade, every finish</div>
+      <h2 class="section__h2">A rainbow of <em>possibilities.</em></h2>
+      <p class="section__lede">Custom Pantone matched, matte HDPE, ready to ship — yours, in any color you can name.</p>
+    </div>
+
+    <div class="tub-reveal__stage">
+      <canvas id="tubRevealCanvas"></canvas>
+    </div>
+  </section>
+
   <!-- ============ DESIGN YOUR TUB CTA (DARK) ============ -->
   <section class="section section--dark design-cta" id="design-cta">
     <div class="design-cta__inner">
@@ -498,6 +558,347 @@
   </footer>
 
 </div>
+
+<!-- ============ TUB REVEAL — 3D animation ============ -->
+<!-- Three.js (r128) loaded from CDN, same version used by Design.html -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  // Bail out if the canvas isn't on this page (defensive — keeps the rest
+  // of the site script running cleanly even if this section is removed).
+  var canvas = document.getElementById('tubRevealCanvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  // ===================================================================
+  // CONFIG — colours, layout, motion. Tweak these to taste.
+  // ===================================================================
+  var HERO_COLOR  = '#0a0a0a'; // Black hero tub (matte)
+  var FAN_COLORS = [
+    { name: 'Red',    pantone: '185 C',  hex: '#e4002b' },
+    { name: 'Orange', pantone: '165 C',  hex: '#ff671f' },
+    { name: 'Yellow', pantone: '7549 C', hex: '#ffb71b' },
+    { name: 'Green',  pantone: '354 C',  hex: '#00b140' },
+    { name: 'Blue',   pantone: '285 C',  hex: '#0072ce' },
+  ];
+
+  // Arc angles (degrees) read left-to-right as the rainbow.
+  // -90 = far left, 0 = directly behind hero, +90 = far right.
+  // Outer tubs at ±90, inner at ±35 (tight, like Apple's iPhone reveal).
+  var FAN_ANGLES_DEG = [-90, -35, 0, 35, 90];
+  var ARC_RADIUS = 5.5;            // arc radius in scene units
+  var CENTER_TUB_EXTRA_Z_PUSH = 2.5; // extra Z push for the 0° tub (so it sits behind hero)
+  var FAN_BACK_OFFSET = 1.5;       // base Z offset for all fan tubs
+  var HERO_LIFT = 0.25;            // how much hero rises as animation plays
+  var FLOAT_AMPLITUDE = 0.04;      // idle vertical bob amplitude
+  var HERO_Z = 0.5;                // hero forward Z so it stays in front
+
+  // 20oz model dimensions (matched from the master Tub Designer file).
+  var MM = 1 / 30;
+  var TUB = { diameter: 89, bodyH: 92, lidH: 15 };
+  var PARTING_GAP = 0.003;
+
+  function srgbHexToLinearColor(hex) {
+    var c = new THREE.Color(hex);
+    c.convertSRGBToLinear();
+    return c;
+  }
+
+  // ===================================================================
+  // SCENE / RENDERER / LIGHTING — matches the Design.html master file
+  // ===================================================================
+  var stage = canvas.parentElement;
+  var section = document.getElementById('tub-reveal');
+
+  var scene = new THREE.Scene();
+  scene.background = null; // transparent so the page bg shows through
+
+  var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.gammaFactor = 2.2;
+  renderer.physicallyCorrectLights = true;
+  renderer.toneMapping = THREE.NoToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.shadowMap.enabled = false;
+
+  // Procedural studio strip env map (same as master designer file)
+  function buildEnvMap() {
+    var c = document.createElement('canvas');
+    c.width = 512; c.height = 256;
+    var cx = c.getContext('2d');
+    var grad = cx.createLinearGradient(0, 0, 0, 256);
+    grad.addColorStop(0.0, '#ffffff');
+    grad.addColorStop(0.3, '#e8e4dc');
+    grad.addColorStop(0.55, '#888783');
+    grad.addColorStop(1.0, '#363430');
+    cx.fillStyle = grad; cx.fillRect(0, 0, 512, 256);
+    cx.fillStyle = 'rgba(255,255,255,0.85)'; cx.fillRect(0, 50, 512, 22);
+    cx.fillStyle = 'rgba(255,255,255,0.4)';  cx.fillRect(0, 100, 512, 8);
+    cx.fillStyle = 'rgba(255,255,255,0.25)'; cx.fillRect(0, 130, 512, 4);
+    var tex = new THREE.CanvasTexture(c);
+    tex.mapping = THREE.EquirectangularReflectionMapping;
+    tex.encoding = THREE.sRGBEncoding;
+    return tex;
+  }
+  var envMap = buildEnvMap();
+
+  // Lighting rig (key + fill + rim + hemi + ambient) from master file
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  var hemi = new THREE.HemisphereLight(0xfff5e0, 0xddd4c0, 0.4);
+  hemi.position.set(0, 10, 0); scene.add(hemi);
+  var keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+  keyLight.position.set(3, 5, 4); scene.add(keyLight);
+  var fillLight = new THREE.DirectionalLight(0xfff0e0, 0.7);
+  fillLight.position.set(-4, 2, 3); scene.add(fillLight);
+  var rimLight = new THREE.DirectionalLight(0xffffff, 0.6);
+  rimLight.position.set(0, 2, -4); scene.add(rimLight);
+
+  // ===================================================================
+  // 20oz LATHE PROFILES — identical to master file
+  // ===================================================================
+  function makeBodyProfile(radius, height) {
+    var pts = [];
+    var chamfer = Math.min(radius * 0.05, height * 0.03);
+    pts.push(new THREE.Vector2(0, 0));
+    pts.push(new THREE.Vector2(radius - chamfer, 0));
+    pts.push(new THREE.Vector2(radius - chamfer * 0.5, chamfer * 0.5));
+    pts.push(new THREE.Vector2(radius, chamfer));
+    pts.push(new THREE.Vector2(radius, height - chamfer));
+    pts.push(new THREE.Vector2(radius - chamfer * 0.3, height));
+    return pts;
+  }
+  function makeLidSidesProfile(radius, height) {
+    var pts = [];
+    var topChamfer = Math.min(radius * 0.04, height * 0.15);
+    pts.push(new THREE.Vector2(radius, 0));
+    pts.push(new THREE.Vector2(radius, height - topChamfer));
+    pts.push(new THREE.Vector2(radius - topChamfer * 0.5, height - topChamfer * 0.3));
+    pts.push(new THREE.Vector2(radius - topChamfer, height));
+    return pts;
+  }
+  function getLidTopRadius(radius, height) {
+    var topChamfer = Math.min(radius * 0.04, height * 0.15);
+    return radius - topChamfer;
+  }
+
+  // Build geometries once and share across all 6 tubs.
+  var radius = (TUB.diameter / 2) * MM;
+  var bodyH  = TUB.bodyH * MM;
+  var lidH   = TUB.lidH * MM;
+
+  var bodyGeo = new THREE.LatheGeometry(makeBodyProfile(radius, bodyH), 128);
+  var lidSidesGeo = new THREE.LatheGeometry(makeLidSidesProfile(radius, lidH), 128);
+  var topRadius = getLidTopRadius(radius, lidH);
+  var lidTopGeo = new THREE.CircleGeometry(topRadius, 128);
+  lidTopGeo.rotateX(-Math.PI / 2);
+  lidTopGeo.computeVertexNormals();
+  var partingGeo = new THREE.CylinderGeometry(radius * 0.998, radius * 0.998, PARTING_GAP * 1.5, 128, 1, true);
+
+  var TUB_TOTAL_HEIGHT = bodyH + PARTING_GAP + lidH;
+
+  // ===================================================================
+  // TUB FACTORY — one tub group, own materials, geometry shared
+  // ===================================================================
+  function buildTub(hex) {
+    var group = new THREE.Group();
+    var matParams = {
+      color: srgbHexToLinearColor(hex),
+      roughness: 0.5, metalness: 0.0,
+      clearcoat: 0.25, clearcoatRoughness: 0.6
+    };
+    var bodyMat = new THREE.MeshPhysicalMaterial(matParams);
+    bodyMat.envMap = envMap; bodyMat.envMapIntensity = 0.85;
+    var lidMat = new THREE.MeshPhysicalMaterial(matParams);
+    lidMat.envMap = envMap; lidMat.envMapIntensity = 0.85;
+    var lidTopMat = new THREE.MeshPhysicalMaterial(matParams);
+    lidTopMat.envMap = envMap; lidTopMat.envMapIntensity = 0.85;
+    var partingMat = new THREE.MeshBasicMaterial({ color: srgbHexToLinearColor('#000000') });
+
+    var body = new THREE.Mesh(bodyGeo, bodyMat); body.position.y = 0;
+    var lidSides = new THREE.Mesh(lidSidesGeo, lidMat); lidSides.position.y = bodyH + PARTING_GAP;
+    var lidTop = new THREE.Mesh(lidTopGeo, lidTopMat); lidTop.position.y = bodyH + PARTING_GAP + lidH + 0.0008;
+    var parting = new THREE.Mesh(partingGeo, partingMat); parting.position.y = bodyH + PARTING_GAP / 2;
+    group.add(body); group.add(lidSides); group.add(lidTop); group.add(parting);
+
+    // Center tub vertically so origin = visual centre.
+    var off = -TUB_TOTAL_HEIGHT / 2;
+    group.children.forEach(function(c){ c.position.y += off; });
+    return group;
+  }
+
+  // Soft contact-shadow disc beneath each tub
+  function buildShadowTexture() {
+    var c = document.createElement('canvas');
+    c.width = 256; c.height = 256;
+    var ctx = c.getContext('2d');
+    var grad = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    grad.addColorStop(0,   'rgba(0,0,0,0.22)');
+    grad.addColorStop(0.4, 'rgba(0,0,0,0.08)');
+    grad.addColorStop(1,   'rgba(0,0,0,0)');
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, 256, 256);
+    return new THREE.CanvasTexture(c);
+  }
+  var shadowTex = buildShadowTexture();
+
+  function buildContactShadow() {
+    var m = new THREE.Mesh(
+      new THREE.PlaneGeometry(3.2, 3.2),
+      new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })
+    );
+    m.rotation.x = -Math.PI / 2;
+    return m;
+  }
+
+  // ===================================================================
+  // BUILD SCENE — 1 hero + 5 fan tubs, each with own shadow
+  // ===================================================================
+  var heroGroup = buildTub(HERO_COLOR);
+  scene.add(heroGroup);
+  var heroShadow = buildContactShadow();
+  scene.add(heroShadow);
+
+  var fanTubs = FAN_COLORS.map(function(c, i){
+    var g = buildTub(c.hex);
+    scene.add(g);
+    var s = buildContactShadow();
+    scene.add(s);
+    var angleDeg = FAN_ANGLES_DEG[i];
+    return {
+      group: g,
+      shadow: s,
+      angleDeg: angleDeg,
+      phaseOffset: i * 0.7,
+      isCenter: angleDeg === 0,
+    };
+  });
+
+  var FLOOR_Y = -TUB_TOTAL_HEIGHT / 2 + 0.005;
+
+  // ===================================================================
+  // CAMERA — fits the full fan based on actual world bounds
+  // ===================================================================
+  var TUB_RADIUS = (TUB.diameter / 2) * MM;
+  var maxAbsAngle = Math.max.apply(null, FAN_ANGLES_DEG.map(function(a){ return Math.abs(a); }));
+  var fanHalfWidth = Math.abs(Math.sin(maxAbsAngle * Math.PI / 180) * ARC_RADIUS) + TUB_RADIUS;
+  var fanHeight = TUB_TOTAL_HEIGHT + HERO_LIFT + 0.5;
+  var FOV_RAD = 38 * Math.PI / 180;
+  var FRAMING_MARGIN = 1.4;
+
+  function distanceToFitVertical(halfH) {
+    return halfH / Math.tan(FOV_RAD / 2);
+  }
+  function distanceToFitHorizontal(halfW, aspect) {
+    var hFov = 2 * Math.atan(Math.tan(FOV_RAD / 2) * aspect);
+    return halfW / Math.tan(hFov / 2);
+  }
+
+  function resize() {
+    var w = stage.clientWidth, h = stage.clientHeight;
+    if (w === 0 || h === 0) return;
+    renderer.setSize(w, h, false);
+    var aspect = w / h;
+    camera.aspect = aspect;
+    var distV = distanceToFitVertical((fanHeight / 2) * FRAMING_MARGIN);
+    var distH = distanceToFitHorizontal(fanHalfWidth * FRAMING_MARGIN, aspect);
+    var dist = Math.max(distV, distH) + 1.5;
+    camera.position.set(0, 0.4, dist);
+    camera.lookAt(0, 0, 0);
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  setTimeout(resize, 100);
+  setTimeout(resize, 500);
+
+  // ===================================================================
+  // SCROLL-DRIVEN PROGRESS
+  // ===================================================================
+  // Animation timing: starts when section's top hits 50% of viewport,
+  // completes when section is 90% scrolled through. Most of the motion
+  // happens while the section is pinned at the top of the viewport.
+  function computeProgress() {
+    var rect = section.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var startY = vh * 0.5;
+    var endY = -(section.offsetHeight - vh) * 0.9;
+    var denom = endY - startY;
+    if (denom === 0) return 0;
+    var raw = (rect.top - startY) / denom;
+    return Math.max(0, Math.min(1, raw));
+  }
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  var progress = 0;
+  var targetProgress = 0;
+  function onScroll() { targetProgress = computeProgress(); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ===================================================================
+  // ANIMATION LOOP
+  // ===================================================================
+  var clock = new THREE.Clock();
+
+  function update(t, p) {
+    var pEased = easeInOutCubic(p);
+
+    // ----- HERO -----
+    // Hero sits forward in Z, gentle bob, lifts as p grows.
+    var heroBob = Math.sin(t * 1.3) * FLOAT_AMPLITUDE;
+    heroGroup.position.set(0, heroBob + HERO_LIFT * pEased, HERO_Z);
+    heroGroup.rotation.y = 0;
+
+    heroShadow.position.set(0, FLOOR_Y, HERO_Z);
+    var heroLiftAmount = HERO_LIFT * pEased;
+    heroShadow.material.opacity = 1.0 - heroLiftAmount * 1.2;
+    var heroShadowScale = 1.0 + heroLiftAmount * 0.6;
+    heroShadow.scale.set(heroShadowScale, heroShadowScale, 1);
+
+    // ----- FAN TUBS — slide from behind hero to final arc positions -----
+    fanTubs.forEach(function(tub){
+      var finalAngleRad = tub.angleDeg * Math.PI / 180;
+      var finalX = Math.sin(finalAngleRad) * ARC_RADIUS;
+      var finalArcZ = (1 - Math.cos(finalAngleRad)) * ARC_RADIUS * 0.5;
+      var finalExtraZ = tub.isCenter ? CENTER_TUB_EXTRA_Z_PUSH : 0;
+      var finalZ = -FAN_BACK_OFFSET - finalArcZ - finalExtraZ;
+
+      // Start position: behind the hero, far enough back that perspective
+      // shrinks them just inside the hero's silhouette.
+      var startX = 0;
+      var startZ = -2.5;
+
+      var x = startX + (finalX - startX) * pEased;
+      var z = startZ + (finalZ - startZ) * pEased;
+
+      var bob = Math.sin(t * 1.1 + tub.phaseOffset) * FLOAT_AMPLITUDE * pEased;
+      var edgeFactor = Math.abs(tub.angleDeg) / 90;
+      var baseLift = HERO_LIFT * pEased * (0.7 + edgeFactor * 0.4);
+
+      tub.group.position.set(x, bob + baseLift, z);
+      tub.group.rotation.y = -finalAngleRad * 0.4 * pEased;
+      tub.group.scale.set(1, 1, 1);
+
+      tub.shadow.position.set(x, FLOOR_Y, z);
+      tub.shadow.material.opacity = pEased * (1.0 - baseLift * 1.2);
+      var shScale = (0.85 + 0.15 * pEased) * (1 + baseLift * 0.6);
+      tub.shadow.scale.set(shScale, shScale, 1);
+    });
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    progress += (targetProgress - progress) * 0.12;
+    update(clock.getElapsedTime(), progress);
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
 
 <!-- ============ INTERACTIVE BITS ============ -->
 <script>
