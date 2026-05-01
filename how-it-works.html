@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How It Works — NutraPack</title>
+<meta name="description" content="Sketch to shelf in five steps. One partner across the whole package — no hand-offs, no broken phone.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=geist@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css?v=9">
+
+<style>
+  /* How-it-works page-specific layout */
+  .hiw-hero {
+    padding: clamp(80px, 10vw, 140px) var(--pad) clamp(60px, 8vw, 100px);
+    border-bottom: 1px solid var(--hairline);
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+  .hiw-hero__eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .hiw-hero__eyebrow .star {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .hiw-hero h1 {
+    font-family: var(--display);
+    font-size: clamp(48px, 8vw, 120px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    max-width: 14ch;
+  }
+  .hiw-hero h1 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    text-transform: none;
+    letter-spacing: -0.03em;
+  }
+  .hiw-hero p {
+    font-family: var(--ui);
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 56ch;
+  }
+
+  /* Big numbered steps */
+  .hiw-steps {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 80px) var(--pad);
+  }
+  .hiw-step {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(20px, 4vw, 60px);
+    padding: clamp(40px, 6vw, 80px) 0;
+    border-bottom: 1px solid var(--hairline);
+    align-items: start;
+  }
+  .hiw-step:last-child { border-bottom: none; }
+  .hiw-step__num {
+    font-family: var(--display);
+    font-size: clamp(80px, 12vw, 180px);
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+  .hiw-step__body {
+    padding-top: clamp(8px, 1vw, 20px);
+  }
+  .hiw-step__kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 16px;
+  }
+  .hiw-step__title {
+    font-family: var(--display);
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hiw-step__title em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    text-transform: none;
+  }
+  .hiw-step__body p {
+    font-family: var(--ui);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 16px;
+    max-width: 60ch;
+  }
+  .hiw-step__body p:last-child { margin-bottom: 0; }
+  .hiw-step__meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .hiw-step__meta-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .hiw-step__meta-item strong {
+    color: var(--ink);
+    font-weight: 500;
+    margin-left: 6px;
+  }
+
+  /* Bottom CTA */
+  .hiw-end {
+    background: var(--ink);
+    color: #fff;
+    padding: clamp(80px, 10vw, 140px) var(--pad);
+    text-align: center;
+  }
+  .hiw-end__inner {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .hiw-end h2 {
+    font-family: var(--display);
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .hiw-end h2 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    text-transform: none;
+  }
+  .hiw-end p {
+    font-family: var(--ui);
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.55;
+    color: oklch(0.85 0.01 80);
+    max-width: 56ch;
+  }
+
+  @media (max-width: 700px) {
+    .hiw-step {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .hiw-step__num {
+      font-size: 80px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="site-header" id="top">
+    <a href="index.html" class="site-header__brand">
+      <img src="images/nutapack@300x.png" alt="NutraPack" class="site-header__logo">
+    </a>
+    <nav class="site-header__nav" id="site-nav" data-open="false">
+      <a href="index.html" class="site-header__link">Home</a>
+      <a href="Design.html" class="site-header__link">Design</a>
+      <a href="how-it-works.html" class="site-header__link" aria-current="page">How It Works</a>
+      <a href="about.html" class="site-header__link">About us</a>
+    </nav>
+    <a href="contact.html" class="site-header__cta">
+      Contact us<span class="site-header__cta-arrow">→</span>
+    </a>
+    <button class="site-header__burger" aria-label="Menu" id="burger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hiw-hero">
+    <div class="hiw-hero__eyebrow">
+      <span class="star"></span>
+      How we work
+    </div>
+    <h1>Sketch <em>to shelf.</em></h1>
+    <p>One partner across the whole package. Five steps, no hand-offs, no broken phone — just a clear path from your first idea to a finished product on a pallet.</p>
+  </section>
+
+  <!-- ============ FIVE STEPS ============ -->
+  <section class="hiw-steps">
+
+    <div class="hiw-step">
+      <div class="hiw-step__num">01</div>
+      <div class="hiw-step__body">
+        <div class="hiw-step__kicker">Step one</div>
+        <h2 class="hiw-step__title">Brief</h2>
+        <p>Send us a sketch, a competitor you admire, or a Pinterest board. We translate whatever you have into a real packaging spec — materials, dimensions, finishes, decoration method. No NDA needed to get started.</p>
+        <p>If you don't know what you want yet, that's fine too. Most founders don't. We ask the right questions to get there.</p>
+        <div class="hiw-step__meta">
+          <span class="hiw-step__meta-item">What you send<strong>Anything</strong></span>
+          <span class="hiw-step__meta-item">What you get back<strong>A spec sheet</strong></span>
+          <span class="hiw-step__meta-item">Time<strong>Same week</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hiw-step">
+      <div class="hiw-step__num">02</div>
+      <div class="hiw-step__body">
+        <div class="hiw-step__kicker">Step two</div>
+        <h2 class="hiw-step__title">Print</h2>
+        <p>Your designer hands you the file; we take it from there. Press matching, label printing, decoration techniques, and quality control — coordinated across our supplier network so you get finished components, not "almost there" samples.</p>
+        <p>Bring your own artwork or send us your specs. We work with what you have.</p>
+        <div class="hiw-step__meta">
+          <span class="hiw-step__meta-item">You provide<strong>Artwork files</strong></span>
+          <span class="hiw-step__meta-item">We provide<strong>Printed components</strong></span>
+          <span class="hiw-step__meta-item">Time<strong>~14 days</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hiw-step">
+      <div class="hiw-step__num">03</div>
+      <div class="hiw-step__body">
+        <div class="hiw-step__kicker">Step three</div>
+        <h2 class="hiw-step__title">Source</h2>
+        <p>This is where most boutique brands lose weeks. We consolidate every component — bottles, caps, labels, secondaries, fillers — under one timeline and one purchase order. No three-vendor scramble. No timing risk landing on you.</p>
+        <p>You get one quote, one PO, one timeline.</p>
+        <div class="hiw-step__meta">
+          <span class="hiw-step__meta-item">POs<strong>One</strong></span>
+          <span class="hiw-step__meta-item">Vendors managed<strong>By us</strong></span>
+          <span class="hiw-step__meta-item">Your job<strong>Approve and ship</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hiw-step">
+      <div class="hiw-step__num">04</div>
+      <div class="hiw-step__body">
+        <div class="hiw-step__kicker">Step four</div>
+        <h2 class="hiw-step__title">Produce</h2>
+        <p>Press-pass approval before the run goes wide. Line QA throughout production. A sealed sample box mailed to your office before anything ships, so the first time you see your finished product isn't on a pallet at your fulfillment partner.</p>
+        <div class="hiw-step__meta">
+          <span class="hiw-step__meta-item">QA<strong>Press-pass + line</strong></span>
+          <span class="hiw-step__meta-item">Sample box<strong>Always</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hiw-step">
+      <div class="hiw-step__num">05</div>
+      <div class="hiw-step__body">
+        <div class="hiw-step__kicker">Step five</div>
+        <h2 class="hiw-step__title">Ship</h2>
+        <p>Direct to your fulfillment partner, your co-packer, or your warehouse. We track every pallet from line to dock, and we don't disappear after delivery. If something is wrong on arrival, we're the one phone call you make.</p>
+        <div class="hiw-step__meta">
+          <span class="hiw-step__meta-item">Tracked<strong>Pallet-level</strong></span>
+          <span class="hiw-step__meta-item">After delivery<strong>One point of contact</strong></span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ END CTA ============ -->
+  <section class="hiw-end">
+    <div class="hiw-end__inner">
+      <h2>Ready to <em>start?</em></h2>
+      <p>Tell us what you're launching. A real human reply within 48 hours, with materials, MOQs, lead times and a price.</p>
+      <a href="contact.html" class="btn btn--primary">
+        Contact us
+        <span class="btn__arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div class="site-footer__wordmark">NutraPack</div>
+        <p class="site-footer__tag">Custom packaging for emerging supplement &amp; wellness brands. Designed, sourced, shipped — from 10,000 MOQ.</p>
+      </div>
+      <div class="site-footer__cols">
+        <div class="site-footer__col">
+          <div class="site-footer__h">Site</div>
+          <a href="index.html">Home</a>
+          <a href="Design.html">Design</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="about.html">About us</a>
+        </div>
+        <div class="site-footer__col">
+          <div class="site-footer__h">Capabilities</div>
+          <a href="Design.html">Open the Tub Designer</a>
+          <a href="index.html#catalog">Pressure-sensitive labels</a>
+          <a href="index.html#catalog">Gusset bags &amp; tubes</a>
+          <a href="index.html#catalog">Stick packs</a>
+        </div>
+        <div class="site-footer__col">
+          <div class="site-footer__h">Contact</div>
+          <a href="mailto:contact@nutrapack.co">contact@nutrapack.co</a>
+          <a href="contact.html">Contact us</a>
+          <a href="https://instagram.com/nutrapack.co" target="_blank" rel="noopener noreferrer" class="site-footer__social">
+            <svg class="site-footer__social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+            </svg>
+            <span>@nutrapack.co</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© <span id="year">2026</span> NutraPack. All rights reserved.</span>
+      <span class="site-footer__star"></span>
+      <span>Made with intention.</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // Mobile menu toggle
+  var burger = document.getElementById('burger-btn');
+  var nav = document.getElementById('site-nav');
+  if (burger && nav) {
+    burger.addEventListener('click', function(){
+      var isOpen = nav.getAttribute('data-open') === 'true';
+      nav.setAttribute('data-open', isOpen ? 'false' : 'true');
+    });
+    nav.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        nav.setAttribute('data-open', 'false');
+      });
+    });
+  }
+  // Footer year
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Accent color rotation — same as homepage, smooth 2s cycle
+  var accentColors = [
+    '#ff5b1f',  // orange
+    '#1f6bff',  // blue
+    '#2bb673',  // green
+    '#e83a3a',  // red
+    '#8a4dff'   // purple
+  ];
+  var accentIndex = 0;
+  setInterval(function(){
+    accentIndex = (accentIndex + 1) % accentColors.length;
+    document.documentElement.style.setProperty('--accent', accentColors[accentIndex]);
+  }, 2000);
+})();
+</script>
+
+</body>
+</html>
