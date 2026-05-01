@@ -53,13 +53,18 @@
     height: 100vh;
   }
   /* On mobile the 100vh canvas leaves big gaps above/below the tubs.
-     Centering the canvas with reduced height inside a still-100vh
-     sticky container fills the visible area better. */
+     Solution: shrink the sticky stage to match the canvas height (so
+     no empty cream above/below), AND shrink the scroll runway
+     proportionally so the animation feels paced the same. */
   @media (max-width: 700px) {
+    .tub-reveal {
+      height: 200vh;
+    }
     .tub-reveal__stage {
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 65vh;
     }
     #tubRevealCanvas {
       height: 65vh; /* tubs fill more of the visible area */
