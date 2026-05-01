@@ -57,6 +57,27 @@
     height: 100%;
     display: block;
   }
+  /* "Keep scrolling" hint — sits below the tubs, fades in as the
+     animation completes (opacity is driven by JS via --hint-opacity).
+     Typography matches .section__lede (Instrument Serif italic). */
+  .tub-reveal__hint {
+    position: absolute;
+    bottom: clamp(40px, 8vh, 80px);
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    color: var(--ink-2);
+    text-align: center;
+    pointer-events: none;
+    white-space: nowrap;
+    opacity: var(--hint-opacity, 0);
+    transition: opacity 200ms ease-out;
+  }
 </style>
 </head>
 <body>
@@ -392,6 +413,7 @@
 
     <div class="tub-reveal__stage">
       <canvas id="tubRevealCanvas"></canvas>
+      <p class="tub-reveal__hint" id="tubRevealHint">Keep scrolling to design your tubs.</p>
     </div>
   </section>
 
@@ -585,7 +607,13 @@
   // -90 = far left, 0 = directly behind hero, +90 = far right.
   // Outer tubs at ±90, inner at ±35 (tight, like Apple's iPhone reveal).
   var FAN_ANGLES_DEG = [-90, -35, 0, 35, 90];
-  var ARC_RADIUS = 5.5;            // arc radius in scene units
+
+  // Arc radius in scene units. On wide (desktop) aspect this stays at the
+  // base value; on portrait (mobile) we compress it dynamically in resize()
+  // so the fan fits without the camera zooming way out and shrinking everything.
+  var ARC_RADIUS_BASE = 5.5;
+  var ARC_RADIUS = ARC_RADIUS_BASE; // re-computed in resize()
+
   var CENTER_TUB_EXTRA_Z_PUSH = 2.5; // extra Z push for the 0° tub (so it sits behind hero)
   var FAN_BACK_OFFSET = 1.5;       // base Z offset for all fan tubs
   var HERO_LIFT = 0.25;            // how much hero rises as animation plays
@@ -608,6 +636,7 @@
   // ===================================================================
   var stage = canvas.parentElement;
   var section = document.getElementById('tub-reveal');
+  var hintEl = document.getElementById('tubRevealHint');
 
   var scene = new THREE.Scene();
   scene.background = null; // transparent so the page bg shows through
@@ -777,14 +806,35 @@
   var FLOOR_Y = -TUB_TOTAL_HEIGHT / 2 + 0.005;
 
   // ===================================================================
-  // CAMERA — fits the full fan based on actual world bounds
+  // CAMERA — adaptive framing based on viewport aspect
   // ===================================================================
+  // Strategy:
+  //   - Wide (desktop, aspect >= 1.4): use full ARC_RADIUS_BASE (5.5),
+  //     camera distance comes mostly from horizontal fit.
+  //   - Square-ish (tablet, 0.8 to 1.4): keep arc radius, balance fits.
+  //   - Portrait (mobile, < 0.8): compress arc radius down to ~2.8 so the
+  //     fan fits in the narrow viewport without the camera pulling so far
+  //     back that the tubs become a tiny stripe in a sea of empty space.
+  //
+  // The arc is recomputed on every resize so the layout responds to
+  // orientation changes and window resizes.
   var TUB_RADIUS = (TUB.diameter / 2) * MM;
-  var maxAbsAngle = Math.max.apply(null, FAN_ANGLES_DEG.map(function(a){ return Math.abs(a); }));
-  var fanHalfWidth = Math.abs(Math.sin(maxAbsAngle * Math.PI / 180) * ARC_RADIUS) + TUB_RADIUS;
-  var fanHeight = TUB_TOTAL_HEIGHT + HERO_LIFT + 0.5;
   var FOV_RAD = 38 * Math.PI / 180;
-  var FRAMING_MARGIN = 1.4;
+  var FRAMING_MARGIN = 1.25;
+
+  function computeAdaptiveArcRadius(aspect) {
+    // Smoothly scale arc radius based on aspect ratio.
+    //   aspect 1.4+ (landscape):  full radius (5.5)
+    //   aspect 0.8 (square):      ~85% (4.7)
+    //   aspect 0.5 (portrait):    ~52% (2.85)
+    //   aspect 0.4 (narrow phone): ~45% (2.5)
+    if (aspect >= 1.4) return ARC_RADIUS_BASE;
+    if (aspect <= 0.4) return ARC_RADIUS_BASE * 0.45;
+    // Linear interp between aspect 0.4 (0.45x) and 1.4 (1.0x)
+    var t = (aspect - 0.4) / (1.4 - 0.4);
+    var scale = 0.45 + (1.0 - 0.45) * t;
+    return ARC_RADIUS_BASE * scale;
+  }
 
   function distanceToFitVertical(halfH) {
     return halfH / Math.tan(FOV_RAD / 2);
@@ -800,14 +850,32 @@
     renderer.setSize(w, h, false);
     var aspect = w / h;
     camera.aspect = aspect;
+
+    // Recompute arc radius to fit current viewport aspect.
+    ARC_RADIUS = computeAdaptiveArcRadius(aspect);
+
+    // World-space bounds of the fanned-out scene at current arc radius.
+    var maxAbsAngle = Math.max.apply(null, FAN_ANGLES_DEG.map(function(a){ return Math.abs(a); }));
+    var fanHalfWidth = Math.abs(Math.sin(maxAbsAngle * Math.PI / 180) * ARC_RADIUS) + TUB_RADIUS;
+    var fanHeight = TUB_TOTAL_HEIGHT + HERO_LIFT + 0.6;
+
     var distV = distanceToFitVertical((fanHeight / 2) * FRAMING_MARGIN);
     var distH = distanceToFitHorizontal(fanHalfWidth * FRAMING_MARGIN, aspect);
     var dist = Math.max(distV, distH) + 1.5;
-    camera.position.set(0, 0.4, dist);
-    camera.lookAt(0, 0, 0);
+
+    // Aim camera at the visual center of the fan, slightly above origin
+    // so the tubs sit in the middle of the canvas (the tubs have their
+    // origin at vertical centre, but the contact shadow extends below,
+    // so a small upward aim balances the composition).
+    camera.position.set(0, 0.3, dist);
+    camera.lookAt(0, 0.1, 0);
     camera.updateProjectionMatrix();
   }
   window.addEventListener('resize', resize);
+  // Also re-resize on orientation change for mobile devices.
+  window.addEventListener('orientationchange', function(){
+    setTimeout(resize, 100);
+  });
   resize();
   setTimeout(resize, 100);
   setTimeout(resize, 500);
@@ -895,6 +963,13 @@
     progress += (targetProgress - progress) * 0.12;
     update(clock.getElapsedTime(), progress);
     renderer.render(scene, camera);
+
+    // Fade in the "keep scrolling" hint over the last 30% of the animation.
+    // Starts fading in at p=0.7, fully visible at p=1.0.
+    if (hintEl) {
+      var hintOpacity = Math.max(0, Math.min(1, (progress - 0.7) / 0.3));
+      hintEl.style.setProperty('--hint-opacity', hintOpacity.toFixed(3));
+    }
   }
   animate();
 })();
