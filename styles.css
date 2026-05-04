@@ -37,6 +37,10 @@
 .hero__eyebrow .star,
 .section__kicker .star,
 .quote-bullets li::before,
+.quote-field input:focus,
+.quote-field select:focus,
+.quote-field textarea:focus,
+.design-cta__title em,
 /* About / Contact / How It Works page elements */
 .about-hero h1 em,
 .about-hero__eyebrow .star,
@@ -55,6 +59,7 @@
 .site-header__cta,
 .site-header__star,
 .site-footer__star,
+.site-footer__social-icon,
 .site-header__link::after {
   transition: var(--accent-tx);
 }
@@ -286,7 +291,7 @@ img, svg { display: block; max-width: 100%; }
   font-weight: 500;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform 200ms cubic-bezier(.2,.8,.2,1), background 200ms, color 200ms;
+  transition: transform 200ms cubic-bezier(.2,.8,.2,1), background 1200ms cubic-bezier(.4,0,.2,1), background-color 1200ms cubic-bezier(.4,0,.2,1), color 1200ms cubic-bezier(.4,0,.2,1), border-color 1200ms cubic-bezier(.4,0,.2,1);
   white-space: nowrap;
 }
 .btn--primary {
