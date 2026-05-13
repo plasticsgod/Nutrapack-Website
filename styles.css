@@ -255,7 +255,26 @@ img, svg { display: block; max-width: 100%; }
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
+  text-decoration: none;
+  cursor: pointer;
 }
+.hero__cta-side:hover { transform: translateY(-2px); transition: transform 200ms ease, var(--accent-tx); }
+.hero__cta-side .hero__cta-side-headline {
+  font-family: var(--display);
+  font-size: clamp(36px, 4.5vw, 64px);
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.hero__cta-side .hero__cta-side-sub {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+/* Legacy classes preserved in case .num/.label is reused elsewhere */
 .hero__cta-side .num {
   font-family: var(--display);
   font-size: clamp(56px, 8vw, 120px);
