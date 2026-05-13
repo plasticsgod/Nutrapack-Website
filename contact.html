@@ -16,7 +16,7 @@
 <link href="https://api.fontshare.com/v2/css?f[]=geist@400,500,600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=13">
+<link rel="stylesheet" href="styles.css?v=14">
 
 <style>
   /* Contact-page-specific layout */
@@ -197,9 +197,9 @@
         <div class="quote-row">
           <label class="quote-field">
             <span>Component</span>
-            <select name="component" required>
+            <select name="component" data-component-select required>
               <option value="" disabled selected>Select…</option>
-              <option>Plastic bottle</option>
+              <option>Tubs</option>
               <option>Pressure-sensitive label</option>
               <option>Gusset bag</option>
               <option>Paper tube</option>
@@ -217,7 +217,38 @@
             </select>
           </label>
         </div>
-        <label class="quote-field"><span>Tell us about the project</span><textarea name="message" rows="5" placeholder="Launching a daily greens powder. Need 25oz HDPE, custom Pantone matte, screen-printed front + back label." required></textarea></label>
+        <div class="quote-row quote-tub-fields" data-tub-fields hidden>
+          <label class="quote-field">
+            <span>Need lids?</span>
+            <select name="lids" data-tub-required>
+              <option value="" disabled selected>Select…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </label>
+          <label class="quote-field">
+            <span>Material</span>
+            <select name="material" data-tub-required>
+              <option value="" disabled selected>Select…</option>
+              <option>PET</option>
+              <option>HDPE</option>
+              <option>Not sure</option>
+            </select>
+          </label>
+        </div>
+        <div class="quote-row">
+          <label class="quote-field">
+            <span>Timeframe</span>
+            <select name="timeframe" required>
+              <option value="" disabled selected>Select…</option>
+              <option>Less than 1 month</option>
+              <option>1-3 months</option>
+              <option>3-6 months</option>
+              <option>6+ months</option>
+            </select>
+          </label>
+          <label class="quote-field"><span>Color preference</span><input type="text" name="color" placeholder="Pantone 185 C, matte black, etc." /></label>
+        </div>
         <button type="submit" class="btn btn--primary btn--block">Send brief<span class="btn__arrow">→</span></button>
         <div class="quote-small">We reply within one business day. No spam, ever.</div>
         <div class="form-status" data-form-status hidden></div>
@@ -304,6 +335,36 @@
     accentIndex = (accentIndex + 1) % accentColors.length;
     document.documentElement.style.setProperty('--accent', accentColors[accentIndex]);
   }, 2000);
+})();
+
+// Conditional form fields — show "Lids" and "Material" only when Component
+// is "Tubs". Also toggles 'required' on those fields so they don't block
+// submission when hidden.
+(function(){
+  var componentSelects = document.querySelectorAll('[data-component-select]');
+  componentSelects.forEach(function(select){
+    var form = select.closest('form');
+    if (!form) return;
+    var tubFields = form.querySelector('[data-tub-fields]');
+    if (!tubFields) return;
+    var conditionalFields = tubFields.querySelectorAll('[data-tub-required]');
+
+    function update() {
+      var isTubs = select.value === 'Tubs';
+      tubFields.hidden = !isTubs;
+      conditionalFields.forEach(function(field){
+        if (isTubs) {
+          field.setAttribute('required', '');
+        } else {
+          field.removeAttribute('required');
+          field.value = '';
+        }
+      });
+    }
+
+    select.addEventListener('change', update);
+    update();
+  });
 })();
 
 // Form submission handler — submits to Formspree via fetch, shows success
