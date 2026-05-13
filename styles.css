@@ -255,10 +255,7 @@ img, svg { display: block; max-width: 100%; }
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
-  text-decoration: none;
-  cursor: pointer;
 }
-.hero__cta-side:hover { transform: translateY(-2px); transition: transform 200ms ease, var(--accent-tx); }
 .hero__cta-side .hero__cta-side-headline {
   font-family: var(--display);
   font-size: clamp(36px, 4.5vw, 64px);
