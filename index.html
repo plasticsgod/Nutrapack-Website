@@ -16,7 +16,7 @@
 <link href="https://api.fontshare.com/v2/css?f[]=geist@400,500,600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=15">
+<link rel="stylesheet" href="styles.css?v=16">
 
 <style>
   /* ============================================================
@@ -519,6 +519,16 @@
             </select>
           </label>
         </div>
+        <fieldset class="quote-field quote-checkboxes" data-tub-fields hidden>
+          <legend><span>Sizes (select one or more)</span></legend>
+          <div class="quote-checkboxes__group">
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="8oz"><span>8oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="10oz"><span>10oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="20oz"><span>20oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="25oz"><span>25oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="55oz"><span>55oz</span></label>
+          </div>
+        </fieldset>
         <div class="quote-row">
           <label class="quote-field">
             <span>Timeframe</span>
@@ -532,6 +542,7 @@
           </label>
           <label class="quote-field"><span>Color preference</span><input type="text" name="color" placeholder="Pantone 185 C, matte black, etc." /></label>
         </div>
+        <label class="quote-field"><span>Shipping location</span><input type="text" name="shipping_location" placeholder="Where should it ship? (city, state/country, or full address)" required /></label>
         <button type="submit" class="btn btn--primary btn--block">Send brief<span class="btn__arrow">→</span></button>
         <div class="quote-small">We reply within one business day. No spam, ever.</div>
         <div class="form-status" data-form-status hidden></div>
@@ -1062,22 +1073,30 @@
   }, 2000);
 })();
 
-// Conditional form fields — show "Lids" and "Material" only when Component
-// is "Tubs". Also toggles 'required' on those fields so they don't block
-// submission when hidden.
+// Conditional form fields — show tub-specific questions (Lids, Material, Sizes)
+// only when Component is "Tubs". Also toggles 'required' on those fields so
+// they don't block submission when hidden.
 (function(){
   var componentSelects = document.querySelectorAll('[data-component-select]');
   componentSelects.forEach(function(select){
     var form = select.closest('form');
     if (!form) return;
-    var tubFields = form.querySelector('[data-tub-fields]');
-    if (!tubFields) return;
-    var conditionalFields = tubFields.querySelectorAll('[data-tub-required]');
+    var tubFieldGroups = form.querySelectorAll('[data-tub-fields]');
+    if (!tubFieldGroups.length) return;
+    var conditionalRequired = form.querySelectorAll('[data-tub-required]');
 
     function update() {
       var isTubs = select.value === 'Tubs';
-      tubFields.hidden = !isTubs;
-      conditionalFields.forEach(function(field){
+      tubFieldGroups.forEach(function(group){
+        group.hidden = !isTubs;
+        // Clear checkboxes inside hidden groups so we don't submit stale data
+        if (!isTubs) {
+          group.querySelectorAll('input[type="checkbox"]').forEach(function(cb){
+            cb.checked = false;
+          });
+        }
+      });
+      conditionalRequired.forEach(function(field){
         if (isTubs) {
           field.setAttribute('required', '');
         } else {
