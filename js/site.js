@@ -47,7 +47,22 @@
       b.addEventListener('click', function () { if (api) api.goTo(i); });
       return b;
     });
-    when3D(ticker, function () { api = window.NPH.mountTicker({
+    // Phones: show a still of the tub right away and start the 3D on the first touch, scroll or key,
+    // so the page is usable instantly. Computers start the 3D as soon as the page has loaded.
+    var phone = window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+    var poster = null;
+    if (phone) {
+      poster = document.createElement('img'); poster.className = 'hero__poster'; poster.alt = '';
+      poster.src = 'images/web/hero-tub.webp'; poster.width = 1029; poster.height = 915; poster.decoding = 'async';
+      ticker.appendChild(poster);
+    }
+    function startTicker(fn) {
+      if (!phone) return when3D(ticker, fn);
+      var done = false, evs = ['pointerdown', 'touchstart', 'scroll', 'keydown', 'wheel'];
+      function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, { passive: true }); }); fn(); setTimeout(function () { if (poster) { poster.style.opacity = '0'; setTimeout(function () { poster.remove(); }, 400); } }, 350); }
+      evs.forEach(function (e) { window.addEventListener(e, go, { passive: true }); });
+    }
+    startTicker(function () { api = window.NPH.mountTicker({
       stage: ticker,
       onTick: function (i) {
         active = i; cat.textContent = P[i][0]; name.textContent = P[i][1];
