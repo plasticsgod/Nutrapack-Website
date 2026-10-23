@@ -1,33 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://nutrapack.co/</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://nutrapack.co/about.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://nutrapack.co/how-it-works.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://nutrapack.co/Design.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://nutrapack.co/contact.html</loc>
-    <lastmod>2026-05-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://nutrapack.co/</loc><lastmod>2026-10-23</lastmod><image:image><image:loc>https://nutrapack.co/images/web/pantone-tubs.jpg</image:loc></image:image></url>
+  <url><loc>https://nutrapack.co/packaging.html</loc><lastmod>2026-10-23</lastmod><image:image><image:loc>https://nutrapack.co/images/web/colored-tubs.jpg</image:loc></image:image><image:image><image:loc>https://nutrapack.co/images/web/tub-components.jpg</image:loc></image:image></url>
+  <url><loc>https://nutrapack.co/printing.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://nutrapack.co/security-laminations.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://nutrapack.co/Design.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://nutrapack.co/how-it-works.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://nutrapack.co/about.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://nutrapack.co/contact.html</loc><lastmod>2026-10-23</lastmod></url>
 </urlset>

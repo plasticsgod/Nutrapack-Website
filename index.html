@@ -1,1181 +1,340 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NutraPack — Custom packaging for emerging supplement brands</title>
-<!-- Favicon -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NutraPack | Custom Packaging, Label Printing &amp; Security Labels</title>
+<meta name="description" content="Packaging supplier and label printer in Texas: supplement tubs, labels, stickers, shrink sleeves, design and anti-counterfeit labels. Quotes in 48 hours.">
+<link rel="canonical" href="https://nutrapack.co/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NutraPack">
+<meta property="og:title" content="NutraPack | Custom Packaging, Label Printing &amp; Security Labels">
+<meta property="og:description" content="Packaging supplier and label printer in Texas: supplement tubs, labels, stickers, shrink sleeves, design and anti-counterfeit labels. Quotes in 48 hours.">
+<meta property="og:url" content="https://nutrapack.co/">
+<meta property="og:image" content="https://nutrapack.co/images/web/og-nutrapack.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NutraPack | Custom Packaging, Label Printing &amp; Security Labels">
+<meta name="twitter:description" content="Packaging supplier and label printer in Texas: supplement tubs, labels, stickers, shrink sleeves, design and anti-counterfeit labels. Quotes in 48 hours.">
+<meta name="twitter:image" content="https://nutrapack.co/images/web/og-nutrapack.jpg">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/favicon.png">
-<meta name="description" content="Custom packaging for emerging supplement & wellness brands. Designed, sourced, shipped — from 10,000 MOQ.">
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=geist@400,500,600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="styles.css?v=16">
-
-<style>
-  /* ============================================================
-     TUB REVEAL — 3D scroll-driven fan-out animation
-     Matches the site's cream/ink/accent system. The animation logic
-     lives in a script block at the bottom of <body>.
-     ============================================================ */
-  .tub-reveal {
-    /* 300vh runway = generous scroll distance for the cinematic reveal.
-       Reduce to 200vh if it feels too long. */
-    position: relative;
-    width: 100%;
-    height: 300vh;
-    background: var(--bg);
-    border-bottom: 1px solid var(--hairline);
-  }
-  /* Intro copy sits at the top of the section, before the sticky stage.
-     It scrolls past normally as the user enters the runway. */
-  .tub-reveal__intro {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: clamp(96px, 11vw, 180px) var(--pad) clamp(40px, 5vw, 60px);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  .tub-reveal__intro .section__h2 {
-    margin-top: 8px;
-  }
-  /* Sticky stage holds the 3D canvas pinned to the viewport while the
-     user scrolls through the runway. */
-  .tub-reveal__stage {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-  }
-  /* On mobile: keep tubs at original size (full viewport canvas) but
-     shrink the scroll runway aggressively so users don't get stuck
-     on a sticky section forever after the tubs finish fanning out. */
-  @media (max-width: 700px) {
-    .tub-reveal {
-      height: 130vh;
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;family=Barlow+Semi+Condensed:wght@600;700&amp;display=swap">
+<link rel="stylesheet" href="css/site.css?v=20261023">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://nutrapack.co/#org",
+   "name": "NutraPack",
+   "legalName": "NutraPack LLC",
+   "url": "https://nutrapack.co/",
+   "logo": "https://nutrapack.co/images/web/logo.png",
+   "image": "https://nutrapack.co/images/web/og-nutrapack.jpg",
+   "email": "contact@nutrapack.co",
+   "description": "Texas-based packaging, printing and brand protection partner: custom supplement tubs and pouches, label, sticker and shrink sleeve printing, packaging design and anti-counterfeit security laminations.",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Huntsville",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+   },
+   "sameAs": [
+    "https://instagram.com/nutrapack.co"
+   ],
+   "knowsAbout": [
+    "custom supplement packaging",
+    "supplement label printing",
+    "custom sticker printing",
+    "shrink sleeve labels",
+    "packaging design",
+    "label design",
+    "Pantone color matching",
+    "anti-counterfeit labels",
+    "holographic security labels"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://nutrapack.co/#site",
+   "url": "https://nutrapack.co/",
+   "name": "NutraPack",
+   "publisher": {
+    "@id": "https://nutrapack.co/#org"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "What does NutraPack do?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "NutraPack is a packaging, printing and brand protection partner based in Texas. We source custom packaging like supplement tubs, pouches, paper tubes and stick packs, print labels, stickers and shrink sleeves, help with packaging and label design, and make anti-counterfeit security laminations, all under one purchase order."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do you print supplement labels and stickers?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We print custom supplement labels, product labels and stickers, including die-cut and roll labels, press-matched to your Pantone colors and quality-checked before they ship. See label and sticker printing."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What is your minimum order?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Most packaging and printing runs start at 10,000 units, well below the 50,000 many large suppliers ask for. Send a brief and we will tell you what works for your quantity."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How fast do I get a quote?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Within 48 hours. A real person replies with materials, MOQ tiers, lead times and unit cost."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do you ship to my co-manufacturer?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. We ship finished components wherever your product gets filled: your co-manufacturer, co-packer, fulfillment partner or warehouse."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What are security laminations?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Custom laminations for hats, spirits, jerseys and more, with holographic effects, micro text and anti-copy patterns that a scanner or copier can't reproduce. They make the real product look more premium and make fakes easier to spot. See security laminations."
+     }
     }
-    /* Move the hint up close to the tubs so it never overlaps the
-       dark section below. On mobile, the sticky stage scrolls past
-       its bottom edge near where the next section begins, which would
-       cause a hint at "bottom: 40-80px" to render on top of the dark
-       background. Anchoring to top instead keeps it tied to the tubs. */
-    .tub-reveal__hint {
-      bottom: auto;
-      top: 65vh;
-    }
+   ]
   }
-  #tubRevealCanvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  /* "Keep scrolling" hint — sits below the tubs, fades in as the
-     animation completes (opacity is driven by JS via --hint-opacity).
-     Typography matches .section__lede (Instrument Serif italic). */
-  .tub-reveal__hint {
-    position: absolute;
-    bottom: clamp(40px, 8vh, 80px);
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(18px, 1.6vw, 22px);
-    line-height: 1.3;
-    letter-spacing: -0.005em;
-    color: var(--ink-2);
-    text-align: center;
-    pointer-events: none;
-    white-space: nowrap;
-    opacity: var(--hint-opacity, 0);
-    transition: opacity 200ms ease-out;
-  }
-</style>
+ ]
+}
+</script>
 </head>
 <body>
-
-<div class="page">
-
-  <!-- ============ SITE HEADER ============ -->
-  <header class="site-header" id="top">
-    <a href="index.html" class="site-header__brand">
-      <img src="images/nutapack@300x.png" alt="NutraPack" class="site-header__logo">
-    </a>
-    <nav class="site-header__nav" id="site-nav" data-open="false">
-      <a href="index.html" class="site-header__link">Home</a>
-      <a href="Design.html" class="site-header__link">Design</a>
-      <a href="how-it-works.html" class="site-header__link">How It Works</a>
-      <a href="about.html" class="site-header__link">About us</a>
-    </nav>
-    <a href="contact.html" class="site-header__cta">
-      Contact us<span class="site-header__cta-arrow">→</span>
-    </a>
-    <button class="site-header__burger" aria-label="Menu" id="burger-btn">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="hero__top">
-      <div class="hero__eyebrow">
-        <span class="star"></span>
-        NutraPack
-      </div>
-      <p class="hero__lede">Boutique CPG brands ship better-looking products with us — without the agency premium or the 50,000-unit minimum.</p>
-    </div>
-
-    <h1 class="hero__stack">
-      <span class="hero__stack-row">
-        <span>Packaging</span>
-        <span class="hero__chip"><span class="hero__chip-dot"></span>From 10,000 MOQ</span>
-      </span>
-      <span class="hero__stack-row">
-        <span>that</span>
-        <span class="word-flip" id="word-flip" style="min-width: 9ch;">
-          <span class="word-flip__inner" id="word-flip-inner">
-            <span class="word-flip__item">earns</span>
-            <span class="word-flip__item">owns</span>
-            <span class="word-flip__item">sells</span>
-            <span class="word-flip__item">launches</span>
-            <span class="word-flip__item">earns</span>
-          </span>
-        </span>
-      </span>
-      <span class="hero__stack-row">
-        <span>the shelf.</span>
-      </span>
-    </h1>
-
-    <div class="hero__cta-row">
-      <div class="hero__cta-block">
-        <h3>Tell us what you're launching.</h3>
-        <div class="hero__cta-meta">
-          <a href="#quote" class="btn btn--primary">
-            Contact us
-            <span class="btn__arrow">→</span>
-          </a>
-          <span class="small">48-hour reply · Real human · Real quote</span>
-        </div>
-      </div>
-      <div class="hero__cta-side">
-        <div class="hero__cta-side-headline">Design<br>your tub</div>
-        <div class="hero__cta-side-sub">Spin it. Color it. Resize it. See your packaging before we make a single one.</div>
-        <a href="Design.html" class="btn btn--invert btn--block">
-          Open the designer
-          <span class="btn__arrow">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ MARQUEE — DARK ============ -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span class="marquee__item">HDPE<span class="marquee__star"></span></span>
-      <span class="marquee__item">PET<span class="marquee__star"></span></span>
-      <span class="marquee__item">Lids<span class="marquee__star"></span></span>
-      <span class="marquee__item">Liners<span class="marquee__star"></span></span>
-      <span class="marquee__item">Glass<span class="marquee__star"></span></span>
-      <span class="marquee__item">Cosmetics<span class="marquee__star"></span></span>
-      <span class="marquee__item">Nutraceuticals<span class="marquee__star"></span></span>
-      <!-- duplicate for loop -->
-      <span class="marquee__item">HDPE<span class="marquee__star"></span></span>
-      <span class="marquee__item">PET<span class="marquee__star"></span></span>
-      <span class="marquee__item">Lids<span class="marquee__star"></span></span>
-      <span class="marquee__item">Liners<span class="marquee__star"></span></span>
-      <span class="marquee__item">Glass<span class="marquee__star"></span></span>
-      <span class="marquee__item">Cosmetics<span class="marquee__star"></span></span>
-      <span class="marquee__item">Nutraceuticals<span class="marquee__star"></span></span>
-      <!-- third copy for seamless scroll -->
-      <span class="marquee__item">HDPE<span class="marquee__star"></span></span>
-      <span class="marquee__item">PET<span class="marquee__star"></span></span>
-      <span class="marquee__item">Lids<span class="marquee__star"></span></span>
-      <span class="marquee__item">Liners<span class="marquee__star"></span></span>
-      <span class="marquee__item">Glass<span class="marquee__star"></span></span>
-      <span class="marquee__item">Cosmetics<span class="marquee__star"></span></span>
-      <span class="marquee__item">Nutraceuticals<span class="marquee__star"></span></span>
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap">
+    <a class="hdr__logo" href="/" aria-label="NutraPack home"><img src="images/web/logo-white.png" alt="NutraPack" width="58" height="36"></a>
+    <nav id="nav" data-open="false" aria-label="Main"><a href="packaging.html">Packaging</a><a href="printing.html">Printing</a><a href="security-laminations.html">Security labels</a><a href="Design.html">Tub designer</a><a href="about.html">About</a></nav>
+    <div class="hdr__right">
+      <a class="btn" href="contact.html">Get a quote</a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="nav" aria-expanded="false"><span></span></button>
     </div>
   </div>
-
-  <!-- ============ PROBLEMS ============ -->
-  <section class="section" id="problems">
-    <div class="section__head">
-      <div>
-        <div class="section__kicker"><span class="star"></span>Why founders come to us</div>
-        <h2 class="section__h2">You're launching a product. <em>We customize and source how it's packaged.</em></h2>
-      </div>
-      <p class="section__lede">Three problems boutique brands hit again and again — and how NutraPack closes them out.</p>
+</header>
+<main id="main">
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <h1><span class="kick">Custom packaging, label printing &amp; brand protection</span> <span class="title">Print it.<br>Package it.<br>Protect it.</span></h1>
+      <p class="lede">NutraPack is a packaging supplier, label and sticker printer and design partner for brands that put a physical product in someone's hands. From 10,000 units, with a quote in 48 hours.</p>
+      <div class="ctas"><a class="btn btn--solid" href="contact.html">Get a quote →</a><a class="btn" href="#what">What we do</a></div>
     </div>
-    <div class="problems section__inner">
-      <article class="problem">
-        <div class="problem__num">01</div>
-        <h3 class="problem__title">High MOQs lock you out</h3>
-        <p class="problem__body">Big suppliers want 50,000 units before they pick up the phone. We start at 10,000 — so you can launch, test, and scale without betting the company on a single PO.</p>
-      </article>
-      <article class="problem">
-        <div class="problem__num">02</div>
-        <h3 class="problem__title">From your artwork to printed labels</h3>
-        <p class="problem__body">Your designer hands you the file; we take it from there. Press matching, label printing, decoration techniques, and quality control — handled across our supplier network so you get finished components, not "almost there" samples.</p>
-      </article>
-      <article class="problem">
-        <div class="problem__num">03</div>
-        <h3 class="problem__title">Sourcing chaos</h3>
-        <p class="problem__body">Bottles from one place, caps from another, labels from a third — and all the timing risk on you. We source the full component stack and consolidate it under one PO.</p>
-      </article>
+    <div class="hero__vis">
+      <div class="hero__stage" id="ticker" aria-hidden="true"></div>
+      <div class="hero__cap"><span class="kick" id="tkCat">Packaging</span><span class="hero__name" id="tkName">Custom tubs</span></div>
+      <div class="dial" id="dial"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ PRODUCTS ============ -->
-  <section class="section" id="catalog">
-    <div class="section__head">
-      <div>
-        <div class="section__kicker"><span class="star"></span>What we make</div>
-        <h2 class="section__h2">Six categories. <em>One sourcing partner.</em></h2>
-      </div>
-      <p class="section__lede">Custom packaging components for supplements, wellness and cosmetic brands. Built for boutique runs, finished at premium grade.</p>
+<section class="band" id="what">
+  <div class="wrap narrow">
+    <div class="head">
+      <span class="kick">What we do</span>
+      <h2 class="title title--md">One partner from print to shelf</h2>
+      <p class="lede">We handle what your product is packed in, printed on and protected by. Packaging, printing, design and security labels under one PO, so you don't manage three vendors.</p>
     </div>
-    <div class="products section__inner">
-
-      <!-- Tubs (large) -->
-      <article class="product product--lg">
-        <div class="product__top">
-          <div class="product__index">01 / 06</div>
-          <div class="product__sub">8 / 10 / 20 / 25 / 55 oz</div>
-        </div>
-        <div class="product__visual">
-          <svg viewBox="0 0 200 240" class="product__glyph" preserveAspectRatio="xMidYMax meet">
-            <rect x="34" y="30" width="132" height="42" rx="4" fill="#111" />
-            <rect x="38" y="38" width="124" height="2" fill="var(--accent)" opacity="0.5" />
-            <rect x="38" y="44" width="124" height="2" fill="var(--accent)" opacity="0.5" />
-            <rect x="38" y="50" width="124" height="2" fill="var(--accent)" opacity="0.5" />
-            <rect x="38" y="56" width="124" height="2" fill="var(--accent)" opacity="0.5" />
-            <rect x="38" y="62" width="124" height="2" fill="var(--accent)" opacity="0.5" />
-            <rect x="34" y="68" width="132" height="4" fill="#111" opacity="0.5" />
-            <path d="M40 78 L160 78 Q164 78 164 82 L164 218 Q164 226 156 226 L44 226 Q36 226 36 218 L36 82 Q36 78 40 78 Z" fill="var(--accent)" opacity="0.95" />
-            <rect x="42" y="86" width="3" height="130" fill="#fff" opacity="0.35" />
-            <rect x="44" y="102" width="112" height="100" fill="#fafaf7" />
-            <rect x="44" y="102" width="112" height="20" fill="#111" opacity="0.9" />
-            <rect x="56" y="134" width="60" height="6" fill="#111" opacity="0.85" />
-            <rect x="56" y="146" width="88" height="3" fill="#111" opacity="0.55" />
-            <rect x="56" y="154" width="72" height="3" fill="#111" opacity="0.4" />
-            <rect x="56" y="172" width="42" height="20" fill="var(--accent)" opacity="0.95" />
-            <rect x="120" y="178" width="28" height="3" fill="#111" opacity="0.55" />
-            <rect x="120" y="186" width="22" height="3" fill="#111" opacity="0.4" />
-          </svg>
-        </div>
-        <div class="product__bottom">
-          <h3 class="product__name">Tubs</h3>
-          
-        </div>
-      </article>
-
-      <!-- Labels (medium, accent) -->
-      <article class="product product--md product--accent">
-        <div class="product__top">
-          <div class="product__index">02 / 06</div>
-          <div class="product__sub">Front · back · neck</div>
-        </div>
-        <div class="product__visual">
-          <svg viewBox="0 0 220 160" class="product__glyph">
-            <rect x="20" y="20" width="180" height="120" fill="rgba(255,255,255,0.92)" stroke="#fff" stroke-width="2" />
-            <rect x="20" y="20" width="180" height="22" fill="#fff" />
-            <rect x="36" y="58" width="100" height="4" fill="#fff" opacity="0.7" />
-            <rect x="36" y="72" width="140" height="2" fill="#fff" opacity="0.4" />
-            <rect x="36" y="80" width="120" height="2" fill="#fff" opacity="0.4" />
-            <rect x="36" y="88" width="130" height="2" fill="#fff" opacity="0.4" />
-            <rect x="36" y="112" width="40" height="14" fill="#fff" opacity="0.95" />
-            <circle cx="178" cy="118" r="10" fill="none" stroke="#fff" stroke-width="1.5" />
-          </svg>
-        </div>
-        <div class="product__bottom">
-          <h3 class="product__name">Labels</h3>
-          
-        </div>
-      </article>
-
-      <!-- Gusset bags (small) -->
-      <article class="product product--sm">
-        <div class="product__top">
-          <div class="product__index">03 / 06</div>
-          <div class="product__sub">Stand-up · flat-bottom</div>
-        </div>
-        <div class="product__visual">
-          <svg viewBox="0 0 180 220" class="product__glyph" preserveAspectRatio="xMidYMax meet">
-            <path d="M40 30 L140 30 L140 42 L150 50 L150 200 L30 200 L30 50 L40 42 Z" fill="var(--accent)" opacity="0.95" />
-            <path d="M40 30 L40 42 L30 50" fill="none" stroke="#111" stroke-width="1.5" opacity="0.5" />
-            <path d="M140 30 L140 42 L150 50" fill="none" stroke="#111" stroke-width="1.5" opacity="0.5" />
-            <rect x="70" y="30" width="40" height="6" fill="#111" />
-            <rect x="50" y="80" width="80" height="76" fill="#fafaf7" />
-            <rect x="50" y="80" width="80" height="14" fill="#111" opacity="0.85" />
-          </svg>
-        </div>
-        <div class="product__bottom">
-          <h3 class="product__name">Gusset bags</h3>
-          
-        </div>
-      </article>
-
-      <!-- Paper tubes (small, ink) -->
-      <article class="product product--sm product--ink">
-        <div class="product__top">
-          <div class="product__index">04 / 06</div>
-          <div class="product__sub">Push-up · screw · plug</div>
-        </div>
-        <div class="product__visual">
-          <svg viewBox="0 0 120 240" class="product__glyph" preserveAspectRatio="xMidYMax meet">
-            <rect x="32" y="14" width="56" height="14" fill="#fff" />
-            <rect x="26" y="28" width="68" height="200" fill="#fff" opacity="0.95" />
-            <rect x="26" y="28" width="68" height="6" fill="#fff" opacity="0.3" />
-            <rect x="36" y="80" width="48" height="100" fill="rgba(255,255,255,0.92)" />
-            <rect x="36" y="80" width="48" height="12" fill="#fff" opacity="0.85" />
-          </svg>
-        </div>
-        <div class="product__bottom">
-          <h3 class="product__name">Paper tubes</h3>
-          
-        </div>
-      </article>
-
-      <!-- Stick packs (small) -->
-      <article class="product product--sm">
-        <div class="product__top">
-          <div class="product__index">05 / 06</div>
-          <div class="product__sub">2g — 30g fill</div>
-        </div>
-        <div class="product__visual">
-          <svg viewBox="0 0 200 240" class="product__glyph" preserveAspectRatio="xMidYMax meet">
-            <g transform="translate(36, 0)">
-              <rect x="0" y="20" width="32" height="200" fill="var(--accent)" opacity="0.95" />
-              <rect x="0" y="20" width="32" height="8" fill="#111" opacity="0.5" />
-              <rect x="0" y="212" width="32" height="8" fill="#111" opacity="0.5" />
-              <rect x="4" y="80" width="24" height="80" fill="#fafaf7" />
-            </g>
-            <g transform="translate(80, 0)">
-              <rect x="0" y="20" width="32" height="200" fill="var(--accent)" opacity="0.95" />
-              <rect x="0" y="20" width="32" height="8" fill="#111" opacity="0.5" />
-              <rect x="0" y="212" width="32" height="8" fill="#111" opacity="0.5" />
-              <rect x="4" y="80" width="24" height="80" fill="#fafaf7" />
-            </g>
-            <g transform="translate(124, 0)">
-              <rect x="0" y="20" width="32" height="200" fill="var(--accent)" opacity="0.95" />
-              <rect x="0" y="20" width="32" height="8" fill="#111" opacity="0.5" />
-              <rect x="0" y="212" width="32" height="8" fill="#111" opacity="0.5" />
-              <rect x="4" y="80" width="24" height="80" fill="#fafaf7" />
-            </g>
-          </svg>
-        </div>
-        <div class="product__bottom">
-          <h3 class="product__name">Stick packs</h3>
-          
-        </div>
-      </article>
-
-      <!-- Cosmetic (small) -->
-      <article class="product product--sm">
-        <div class="product__top">
-          <div class="product__index">06 / 06</div>
-          <div class="product__sub">Airless · droppers · jars</div>
-        </div>
-        <div class="product__visual">
-          <svg viewBox="0 0 200 220" class="product__glyph" preserveAspectRatio="xMidYMax meet">
-            <ellipse cx="100" cy="40" rx="38" ry="10" fill="#111" />
-            <rect x="62" y="40" width="76" height="140" fill="var(--accent)" opacity="0.95" />
-            <ellipse cx="100" cy="180" rx="38" ry="10" fill="var(--accent)" opacity="0.7" />
-            <rect x="74" y="80" width="52" height="70" fill="#fafaf7" />
-            <rect x="74" y="80" width="52" height="12" fill="#111" opacity="0.85" />
-          </svg>
-        </div>
-        <div class="product__bottom">
-          <h3 class="product__name">Cosmetic</h3>
-          
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ============ SIZES / MIX & MATCH ============ -->
-  <section class="section" id="sizes">
-    <div class="section__head">
-      <div>
-        <div class="section__kicker"><span class="star"></span>Mix &amp; match</div>
-        <h2 class="section__h2">Wanna do something <em>different?</em></h2>
-      </div>
-      <p class="section__lede">Go ahead, go wild. We got you <em style="font-family: var(--serif); font-style: italic; color: var(--accent);">colored</em> — every component, every finish, custom Pantone matched to your brand.</p>
-    </div>
-
-    <div class="mixmatch">
-      <img src="images/NPK5.jpg" alt="Mix and match colored tubs in custom Pantone finishes" style="width:100%; height:auto; display:block;">
-    </div>
-  </section>
-
-  <!-- ============ TUB REVEAL ANIMATION (3D scroll-driven fan-out) ============ -->
-  <section class="tub-reveal" id="tub-reveal">
-    <!-- This section creates a 300vh-tall scroll runway. The sticky stage
-         inside pins to the viewport while the user scrolls through it,
-         and scroll position drives the 3D fan-out animation below. -->
-    <div class="tub-reveal__intro">
-      <div class="section__kicker"><span class="star"></span>Every shade, every finish</div>
-      <h2 class="section__h2">A rainbow of <em>possibilities.</em></h2>
-      <p class="section__lede">Custom Pantone matched, matte HDPE, ready to ship — yours, in any color you can name.</p>
-    </div>
-
-    <div class="tub-reveal__stage">
-      <canvas id="tubRevealCanvas"></canvas>
-      <p class="tub-reveal__hint" id="tubRevealHint">Keep scrolling to design your tubs.</p>
-    </div>
-  </section>
-
-  <!-- ============ DESIGN YOUR TUB CTA (DARK) ============ -->
-  <section class="section section--dark design-cta" id="design-cta">
-    <div class="design-cta__inner">
-      <div class="section__kicker" style="color:#fff; justify-content:center;"><span class="star"></span>Build it yourself</div>
-      <h2 class="design-cta__title">Design your <em>tub.</em></h2>
-      <p class="design-cta__lede">Spin it. Color it. Resize it. Our 3D tub designer lets you see your packaging before we make a single one — no spec sheets, no guessing.</p>
-      <a href="Design.html" class="btn btn--primary design-cta__btn">
-        Open the designer
-        <span class="btn__arrow">→</span>
+    <div class="pillars">
+      <a class="pillar" href="packaging.html">
+        <h3 class="pillar__n">Packaging</h3>
+        <p>Custom supplement tubs, stand-up pouches, paper tubes, stick packs and cosmetic packaging, in any Pantone, from 10,000 units.</p>
+        <ul><li>Tubs 8–55 oz</li><li>Gusset &amp; flat bags</li><li>Paper tubes</li><li>Stick packs</li></ul>
+        <span class="pillar__go">Custom packaging →</span>
+      </a>
+      <a class="pillar" href="printing.html">
+        <h3 class="pillar__n">Printing &amp; design</h3>
+        <p>Supplement labels, product labels, custom stickers and shrink sleeves, press-matched and quality-checked. Need artwork? We help with label and packaging design.</p>
+        <ul><li>Supplement &amp; product labels</li><li>Custom stickers</li><li>Shrink sleeves</li><li>Label &amp; packaging design</li></ul>
+        <span class="pillar__go">Label &amp; sticker printing →</span>
+      </a>
+      <a class="pillar pillar--new" href="security-laminations.html">
+        <h3 class="pillar__n">Brand protection <span class="new">New</span></h3>
+        <p>Anti-counterfeit security laminations with holographic effects, micro text and anti-copy patterns a scanner or copier can't reproduce.</p>
+        <ul><li>Hats</li><li>Spirits</li><li>Jerseys</li><li>And more</li></ul>
+        <span class="pillar__go">Security laminations →</span>
       </a>
     </div>
-  </section>
+    <div class="ind"><span class="kick">Built for</span><ul class="chips"><li>Supplements</li><li>Energy drinks &amp; beverages</li><li>Spirits</li><li>Apparel &amp; merch</li><li>Cosmetics</li><li>Wellness</li></ul></div>
+  </div>
+</section>
 
-  <!-- ============ QUOTE / CTA ============ -->
-  <section class="section" id="quote">
-    <div class="section__head">
-      <div>
-        <div class="section__kicker"><span class="star"></span>Start a project</div>
-        <h2 class="section__h2">Send a brief. <em>Get a quote in 48 hours.</em></h2>
-      </div>
-      <p class="section__lede">A real human reply with materials, MOQs, lead times and price.</p>
-    </div>
-
-    <div class="quote-wrap section__inner">
-      <div class="quote-left">
-        <h3>What you'll get back<br /><em>within 48 hours.</em></h3>
-        <p class="lede">A full quote with materials, MOQ tiers, lead times and unit cost — written by your account lead, not a form-letter bot.</p>
-        <ul class="quote-bullets">
-          <li>Materials, MOQs and lead times</li>
-          <li>Print production handled across our supplier network</li>
-          <li>Direct line to your account lead — no ticket queues</li>
-          <li>Sample box on approved briefs, on us</li>
+<section class="band band--alt" id="security">
+  <div class="wrap narrow">
+    <div class="split">
+      <div class="head">
+        <span class="kick"><span class="new">New</span> Brand protection</span>
+        <h2 class="title title--md">Security laminations</h2>
+        <p class="lede">Brand enhancement that fights counterfeits. Add a custom security lamination to hats, spirits, jerseys and more, with features a scanner or copier can't reproduce.</p>
+        <ul class="feats">
+          <li><b>Custom holographic effects</b><span>Designed around your brand, so the real one looks premium and a fake stands out.</span></li>
+          <li><b>Micro text</b><span>Lettering too fine to scan or photocopy.</span></li>
+          <li><b>Anti-copy patterns</b><span>Patterns that break apart when someone tries to copy them.</span></li>
         </ul>
+        <div class="ctas"><a class="btn btn--solid" href="security-laminations.html">Protect my brand →</a></div>
       </div>
-      <form class="quote-form" id="quote-form" action="https://formspree.io/f/xqenoayb" method="POST">
-        <input type="hidden" name="_subject" value="New project brief — Homepage form">
-        <input type="hidden" name="form_source" value="Homepage">
-        <div class="quote-row">
-          <label class="quote-field"><span>Name</span><input type="text" name="name" placeholder="Jane Founder" required /></label>
-          <label class="quote-field"><span>Brand</span><input type="text" name="brand" placeholder="Daybreak Wellness" /></label>
+      <div class="seal-wrap">
+        <div class="seal-stage" id="seal" aria-hidden="true"></div>
+        <div class="seg" role="group" aria-label="Compare the security seal">
+          <button type="button" id="mOrig" aria-pressed="true">Original</button>
+          <button type="button" id="mCopy" aria-pressed="false">Photocopy</button>
         </div>
-        <label class="quote-field"><span>Email</span><input type="email" name="email" placeholder="jane@daybreak.co" required /></label>
-        <div class="quote-row">
-          <label class="quote-field">
-            <span>Component</span>
-            <select name="component" data-component-select required>
-              <option value="" disabled selected>Select…</option>
-              <option>Tubs</option>
-              <option>Pressure-sensitive label</option>
-              <option>Gusset bag</option>
-              <option>Paper tube</option>
-              <option>Stick pack</option>
-              <option>Cosmetic packaging</option>
-            </select>
-          </label>
-          <label class="quote-field">
-            <span>Quantity</span>
-            <select name="quantity" required>
-              <option value="" disabled selected>Select…</option>
-              <option>10,000 – 20,000</option>
-              <option>20,000 – 50,000</option>
-              <option>50,000+</option>
-            </select>
-          </label>
-        </div>
-        <div class="quote-row quote-tub-fields" data-tub-fields hidden>
-          <label class="quote-field">
-            <span>Need lids?</span>
-            <select name="lids" data-tub-required>
-              <option value="" disabled selected>Select…</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          </label>
-          <label class="quote-field">
-            <span>Material</span>
-            <select name="material" data-tub-required>
-              <option value="" disabled selected>Select…</option>
-              <option>PET</option>
-              <option>HDPE</option>
-              <option>Not sure</option>
-            </select>
-          </label>
-        </div>
-        <fieldset class="quote-field quote-checkboxes" data-tub-fields hidden>
-          <legend><span>Sizes (select one or more)</span></legend>
-          <div class="quote-checkboxes__group">
-            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="8oz"><span>8oz</span></label>
-            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="10oz"><span>10oz</span></label>
-            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="20oz"><span>20oz</span></label>
-            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="25oz"><span>25oz</span></label>
-            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="55oz"><span>55oz</span></label>
-          </div>
-        </fieldset>
-        <div class="quote-row">
-          <label class="quote-field">
-            <span>Timeframe</span>
-            <select name="timeframe" required>
-              <option value="" disabled selected>Select…</option>
-              <option>Less than 1 month</option>
-              <option>1-3 months</option>
-              <option>3-6 months</option>
-              <option>6+ months</option>
-            </select>
-          </label>
-          <label class="quote-field"><span>Color preference</span><input type="text" name="color" placeholder="Pantone 185 C, matte black, etc." /></label>
-        </div>
-        <label class="quote-field"><span>Shipping location</span><input type="text" name="shipping_location" placeholder="Where should it ship? (city, state/country, or full address)" required /></label>
-        <button type="submit" class="btn btn--primary btn--block">Send brief<span class="btn__arrow">→</span></button>
-        <div class="quote-small">We reply within one business day. No spam, ever.</div>
-        <div class="form-status" data-form-status hidden></div>
-      </form>
-    </div>
-  </section>
-
-  <!-- ============ SITE FOOTER ============ -->
-  <footer class="site-footer">
-    <div class="site-footer__top">
-      <div class="site-footer__brand">
-        <div class="site-footer__wordmark">NutraPack</div>
-        <p class="site-footer__tag">Custom packaging for emerging supplement &amp; wellness brands. Designed, sourced, shipped — from 10,000 MOQ.</p>
-      </div>
-      <div class="site-footer__cols">
-        <div class="site-footer__col">
-          <div class="site-footer__h">Site</div>
-          <a href="index.html">Home</a>
-          <a href="Design.html">Design</a>
-          <a href="how-it-works.html">How It Works</a>
-          <a href="about.html">About us</a>
-        </div>
-        <div class="site-footer__col">
-          <div class="site-footer__h">Capabilities</div>
-          <a href="Design.html">Open the Tub Designer</a>
-          <a href="#catalog">Pressure-sensitive labels</a>
-          <a href="#catalog">Gusset bags &amp; tubes</a>
-          <a href="#catalog">Stick packs</a>
-        </div>
-        <div class="site-footer__col">
-          <div class="site-footer__h">Contact</div>
-          <a href="mailto:contact@nutrapack.co">contact@nutrapack.co</a>
-          <a href="contact.html">Contact us</a>
-          <a href="https://instagram.com/nutrapack.co" target="_blank" rel="noopener noreferrer" class="site-footer__social">
-            <svg class="site-footer__social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
-              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
-            </svg>
-            <span>@nutrapack.co</span>
-          </a>
-        </div>
+        <p class="seal-cap" id="sealCap" aria-live="polite">Original: the holographic color shifts as it moves, and the micro text and fine lines stay sharp.</p>
       </div>
     </div>
-    <div class="site-footer__bottom">
-      <span>© <span id="year">2026</span> NutraPack. All rights reserved.</span>
-      <span class="site-footer__star"></span>
-      <span>Made with intention.</span>
+  </div>
+</section>
+
+<section class="full" id="print">
+  <img src="images/web/pantone-tubs.jpg" alt="Custom color tubs in red, orange, yellow, lime, blue and violet Pantone shades" loading="lazy" width="1600" height="1313">
+  <div class="wrap">
+    <span class="kick">Packaging printer</span>
+    <h2 class="title">Your color.<br>On everything.</h2>
+    <p class="lede">Labels, stickers, shrink sleeves, tubs and lids, press-matched to your Pantone so the whole line looks like one brand.</p>
+    <a class="btn" href="printing.html">Label printing →</a>
+  </div>
+</section>
+
+<section class="np-run" id="lineup" aria-label="Custom tub sizes, drawn to scale">
+  <div class="np-stage" id="stage">
+    <div class="scene wrap">
+      <span class="kick">Custom supplement tubs · 8 · 10 · 20 · 25 · 55 oz</span>
+      <h2 class="title title--md">Five sizes.<br>Any Pantone.</h2>
     </div>
-  </footer>
+    <div class="pend"><a class="btn btn--solid" href="packaging.html#tubs">See tub sizes →</a></div>
+  </div>
+</section>
 
-</div>
+<section class="full full--right">
+  <img src="images/web/lid-emboss.jpg" alt="Blue tub lid with an embossed logo" loading="lazy" style="object-position:50% 60%" width="900" height="1663">
+  <div class="wrap">
+    <span class="kick">Finishing</span>
+    <h2 class="title">Emboss.<br>Deboss.</h2>
+    <p class="lede">Put your mark into the product itself, raised or recessed.</p>
+    <a class="btn" href="packaging.html#tubs">Tub options →</a>
+  </div>
+</section>
 
-<!-- ============ TUB REVEAL — 3D animation ============ -->
-<!-- Three.js (r128) loaded from CDN, same version used by Design.html -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-(function(){
-  // Bail out if the canvas isn't on this page (defensive — keeps the rest
-  // of the site script running cleanly even if this section is removed).
-  var canvas = document.getElementById('tubRevealCanvas');
-  if (!canvas || typeof THREE === 'undefined') return;
+<section class="band" id="lines">
+  <div class="wrap narrow">
+    <div class="head"><span class="kick">One PO · one partner</span><h2 class="title title--md">Everything we make</h2></div>
+    <div class="cols">
+      <div class="col"><h3>Packaging</h3>
+        <a href="packaging.html#tubs"><b>Supplement tubs</b><span>8–55 oz →</span></a>
+        <a href="packaging.html#pouches"><b>Gusset &amp; flat bags</b><span>Stand-up · flat →</span></a>
+        <a href="packaging.html#more"><b>Paper tubes</b><span>Push · screw · plug →</span></a>
+        <a href="packaging.html#more"><b>Stick packs</b><span>2–30 g →</span></a>
+        <a href="packaging.html#more"><b>Cosmetic packaging</b><span>Airless · jars →</span></a>
+      </div>
+      <div class="col"><h3>Printing &amp; design</h3>
+        <a href="printing.html#supplement-labels"><b>Supplement labels</b><span>Front · back · neck →</span></a>
+        <a href="printing.html#stickers"><b>Custom stickers</b><span>Die-cut · roll →</span></a>
+        <a href="printing.html#shrink-sleeves"><b>Shrink sleeves</b><span>Cans · bottles →</span></a>
+        <a href="printing.html#design"><b>Label &amp; packaging design</b><span>Print-ready →</span></a>
+      </div>
+      <div class="col"><h3>Brand protection</h3>
+        <a href="security-laminations.html"><b>Security laminations</b><span>Hats · spirits · jerseys →</span></a>
+        <a href="security-laminations.html#features"><b>Holographic effects</b><span>Custom to your brand →</span></a>
+        <a href="security-laminations.html#features"><b>Micro text &amp; anti-copy</b><span>Can't be scanned →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // ===================================================================
-  // CONFIG — colours, layout, motion. Tweak these to taste.
-  // ===================================================================
-  var HERO_COLOR  = '#0a0a0a'; // Black hero tub (matte)
-  var FAN_COLORS = [
-    { name: 'Red',    pantone: '185 C',  hex: '#e4002b' },
-    { name: 'Orange', pantone: '165 C',  hex: '#ff671f' },
-    { name: 'Yellow', pantone: '7549 C', hex: '#ffb71b' },
-    { name: 'Green',  pantone: '354 C',  hex: '#00b140' },
-    { name: 'Blue',   pantone: '285 C',  hex: '#0072ce' },
-  ];
+<section class="band band--alt">
+  <div class="wrap narrow">
+    <div class="split" style="align-items:start">
+      <div class="head"><span class="kick">About NutraPack</span><h2 class="title title--sm">The partner big suppliers won't call back</h2></div>
+      <div class="prose">
+        <p><strong>NutraPack</strong> is a packaging supplier and printing partner based in Huntsville, Texas, working with supplement, beverage, spirits, apparel and cosmetic brands across the US.</p>
+        <p>Big packaging suppliers want 50,000 units before they pick up the phone. We start at 10,000, take your artwork through press matching, label printing and quality control, and consolidate tubs, lids, labels, stickers and sleeves under one purchase order and one timeline.</p>
+        <p>Now we also protect what you make: custom security laminations that a scanner or copier can't reproduce. <a href="about.html">More about us</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // Arc angles (degrees) read left-to-right as the rainbow.
-  // -90 = far left, 0 = directly behind hero, +90 = far right.
-  // Outer tubs at ±90, inner at ±35 (tight, like Apple's iPhone reveal).
-  var FAN_ANGLES_DEG = [-90, -35, 0, 35, 90];
+<section class="band" id="faq">
+  <div class="wrap narrow">
+    <div class="head"><span class="kick">FAQ</span><h2 class="title title--sm">Questions brands ask first</h2></div>
+    <div class="faq"><details open><summary>What does NutraPack do?</summary><p>NutraPack is a packaging, printing and brand protection partner based in Texas. We source custom packaging like supplement tubs, pouches, paper tubes and stick packs, print labels, stickers and shrink sleeves, help with packaging and label design, and make anti-counterfeit security laminations, all under one purchase order.</p></details><details><summary>Do you print supplement labels and stickers?</summary><p>Yes. We print custom supplement labels, product labels and stickers, including die-cut and roll labels, press-matched to your Pantone colors and quality-checked before they ship. See <a href="printing.html">label and sticker printing</a>.</p></details><details><summary>What is your minimum order?</summary><p>Most packaging and printing runs start at 10,000 units, well below the 50,000 many large suppliers ask for. Send a brief and we will tell you what works for your quantity.</p></details><details><summary>How fast do I get a quote?</summary><p>Within 48 hours. A real person replies with materials, MOQ tiers, lead times and unit cost.</p></details><details><summary>Do you ship to my co-manufacturer?</summary><p>Yes. We ship finished components wherever your product gets filled: your co-manufacturer, co-packer, fulfillment partner or warehouse.</p></details><details><summary>What are security laminations?</summary><p>Custom laminations for hats, spirits, jerseys and more, with holographic effects, micro text and anti-copy patterns that a scanner or copier can't reproduce. They make the real product look more premium and make fakes easier to spot. See <a href="security-laminations.html">security laminations</a>.</p></details></div>
+  </div>
+</section>
 
-  // Arc radius in scene units. On wide (desktop) aspect this stays at the
-  // base value; on portrait (mobile) we compress it dynamically in resize()
-  // so the fan fits without the camera zooming way out and shrinking everything.
-  var ARC_RADIUS_BASE = 5.5;
-  var ARC_RADIUS = ARC_RADIUS_BASE; // re-computed in resize()
-
-  var CENTER_TUB_EXTRA_Z_PUSH = 2.5; // extra Z push for the 0° tub (so it sits behind hero)
-  var FAN_BACK_OFFSET = 1.5;       // base Z offset for all fan tubs
-  var HERO_LIFT = 0.25;            // how much hero rises as animation plays
-  var FLOAT_AMPLITUDE = 0.04;      // idle vertical bob amplitude
-  var HERO_Z = 0.5;                // hero forward Z so it stays in front
-
-  // 20oz model dimensions (matched from the master Tub Designer file).
-  var MM = 1 / 30;
-  var TUB = { diameter: 89, bodyH: 92, lidH: 15 };
-  var PARTING_GAP = 0.003;
-
-  function srgbHexToLinearColor(hex) {
-    var c = new THREE.Color(hex);
-    c.convertSRGBToLinear();
-    return c;
-  }
-
-  // ===================================================================
-  // SCENE / RENDERER / LIGHTING — matches the Design.html master file
-  // ===================================================================
-  var stage = canvas.parentElement;
-  var section = document.getElementById('tub-reveal');
-  var hintEl = document.getElementById('tubRevealHint');
-
-  var scene = new THREE.Scene();
-  scene.background = null; // transparent so the page bg shows through
-
-  var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-
-  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.gammaFactor = 2.2;
-  renderer.physicallyCorrectLights = true;
-  renderer.toneMapping = THREE.NoToneMapping;
-  renderer.toneMappingExposure = 1.0;
-  renderer.shadowMap.enabled = false;
-
-  // Procedural studio strip env map (same as master designer file)
-  function buildEnvMap() {
-    var c = document.createElement('canvas');
-    c.width = 512; c.height = 256;
-    var cx = c.getContext('2d');
-    var grad = cx.createLinearGradient(0, 0, 0, 256);
-    grad.addColorStop(0.0, '#ffffff');
-    grad.addColorStop(0.3, '#e8e4dc');
-    grad.addColorStop(0.55, '#888783');
-    grad.addColorStop(1.0, '#363430');
-    cx.fillStyle = grad; cx.fillRect(0, 0, 512, 256);
-    cx.fillStyle = 'rgba(255,255,255,0.85)'; cx.fillRect(0, 50, 512, 22);
-    cx.fillStyle = 'rgba(255,255,255,0.4)';  cx.fillRect(0, 100, 512, 8);
-    cx.fillStyle = 'rgba(255,255,255,0.25)'; cx.fillRect(0, 130, 512, 4);
-    var tex = new THREE.CanvasTexture(c);
-    tex.mapping = THREE.EquirectangularReflectionMapping;
-    tex.encoding = THREE.sRGBEncoding;
-    return tex;
-  }
-  var envMap = buildEnvMap();
-
-  // Lighting rig (key + fill + rim + hemi + ambient) from master file
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  var hemi = new THREE.HemisphereLight(0xfff5e0, 0xddd4c0, 0.4);
-  hemi.position.set(0, 10, 0); scene.add(hemi);
-  var keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
-  keyLight.position.set(3, 5, 4); scene.add(keyLight);
-  var fillLight = new THREE.DirectionalLight(0xfff0e0, 0.7);
-  fillLight.position.set(-4, 2, 3); scene.add(fillLight);
-  var rimLight = new THREE.DirectionalLight(0xffffff, 0.6);
-  rimLight.position.set(0, 2, -4); scene.add(rimLight);
-
-  // ===================================================================
-  // 20oz LATHE PROFILES — identical to master file
-  // ===================================================================
-  function makeBodyProfile(radius, height) {
-    var pts = [];
-    var chamfer = Math.min(radius * 0.05, height * 0.03);
-    pts.push(new THREE.Vector2(0, 0));
-    pts.push(new THREE.Vector2(radius - chamfer, 0));
-    pts.push(new THREE.Vector2(radius - chamfer * 0.5, chamfer * 0.5));
-    pts.push(new THREE.Vector2(radius, chamfer));
-    pts.push(new THREE.Vector2(radius, height - chamfer));
-    pts.push(new THREE.Vector2(radius - chamfer * 0.3, height));
-    return pts;
-  }
-  function makeLidSidesProfile(radius, height) {
-    var pts = [];
-    var topChamfer = Math.min(radius * 0.04, height * 0.15);
-    pts.push(new THREE.Vector2(radius, 0));
-    pts.push(new THREE.Vector2(radius, height - topChamfer));
-    pts.push(new THREE.Vector2(radius - topChamfer * 0.5, height - topChamfer * 0.3));
-    pts.push(new THREE.Vector2(radius - topChamfer, height));
-    return pts;
-  }
-  function getLidTopRadius(radius, height) {
-    var topChamfer = Math.min(radius * 0.04, height * 0.15);
-    return radius - topChamfer;
-  }
-
-  // Build geometries once and share across all 6 tubs.
-  var radius = (TUB.diameter / 2) * MM;
-  var bodyH  = TUB.bodyH * MM;
-  var lidH   = TUB.lidH * MM;
-
-  var bodyGeo = new THREE.LatheGeometry(makeBodyProfile(radius, bodyH), 128);
-  var lidSidesGeo = new THREE.LatheGeometry(makeLidSidesProfile(radius, lidH), 128);
-  var topRadius = getLidTopRadius(radius, lidH);
-  var lidTopGeo = new THREE.CircleGeometry(topRadius, 128);
-  lidTopGeo.rotateX(-Math.PI / 2);
-  lidTopGeo.computeVertexNormals();
-  var partingGeo = new THREE.CylinderGeometry(radius * 0.998, radius * 0.998, PARTING_GAP * 1.5, 128, 1, true);
-
-  var TUB_TOTAL_HEIGHT = bodyH + PARTING_GAP + lidH;
-
-  // ===================================================================
-  // TUB FACTORY — one tub group, own materials, geometry shared
-  // ===================================================================
-  function buildTub(hex) {
-    var group = new THREE.Group();
-    var matParams = {
-      color: srgbHexToLinearColor(hex),
-      roughness: 0.5, metalness: 0.0,
-      clearcoat: 0.25, clearcoatRoughness: 0.6
-    };
-    var bodyMat = new THREE.MeshPhysicalMaterial(matParams);
-    bodyMat.envMap = envMap; bodyMat.envMapIntensity = 0.85;
-    var lidMat = new THREE.MeshPhysicalMaterial(matParams);
-    lidMat.envMap = envMap; lidMat.envMapIntensity = 0.85;
-    var lidTopMat = new THREE.MeshPhysicalMaterial(matParams);
-    lidTopMat.envMap = envMap; lidTopMat.envMapIntensity = 0.85;
-    var partingMat = new THREE.MeshBasicMaterial({ color: srgbHexToLinearColor('#000000') });
-
-    var body = new THREE.Mesh(bodyGeo, bodyMat); body.position.y = 0;
-    var lidSides = new THREE.Mesh(lidSidesGeo, lidMat); lidSides.position.y = bodyH + PARTING_GAP;
-    var lidTop = new THREE.Mesh(lidTopGeo, lidTopMat); lidTop.position.y = bodyH + PARTING_GAP + lidH + 0.0008;
-    var parting = new THREE.Mesh(partingGeo, partingMat); parting.position.y = bodyH + PARTING_GAP / 2;
-    group.add(body); group.add(lidSides); group.add(lidTop); group.add(parting);
-
-    // Center tub vertically so origin = visual centre.
-    var off = -TUB_TOTAL_HEIGHT / 2;
-    group.children.forEach(function(c){ c.position.y += off; });
-    return group;
-  }
-
-  // Soft contact-shadow disc beneath each tub
-  function buildShadowTexture() {
-    var c = document.createElement('canvas');
-    c.width = 256; c.height = 256;
-    var ctx = c.getContext('2d');
-    var grad = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-    grad.addColorStop(0,   'rgba(0,0,0,0.22)');
-    grad.addColorStop(0.4, 'rgba(0,0,0,0.08)');
-    grad.addColorStop(1,   'rgba(0,0,0,0)');
-    ctx.fillStyle = grad; ctx.fillRect(0, 0, 256, 256);
-    return new THREE.CanvasTexture(c);
-  }
-  var shadowTex = buildShadowTexture();
-
-  function buildContactShadow() {
-    var m = new THREE.Mesh(
-      new THREE.PlaneGeometry(3.2, 3.2),
-      new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false })
-    );
-    m.rotation.x = -Math.PI / 2;
-    return m;
-  }
-
-  // ===================================================================
-  // BUILD SCENE — 1 hero + 5 fan tubs, each with own shadow
-  // ===================================================================
-  var heroGroup = buildTub(HERO_COLOR);
-  scene.add(heroGroup);
-  var heroShadow = buildContactShadow();
-  scene.add(heroShadow);
-
-  var fanTubs = FAN_COLORS.map(function(c, i){
-    var g = buildTub(c.hex);
-    scene.add(g);
-    var s = buildContactShadow();
-    scene.add(s);
-    var angleDeg = FAN_ANGLES_DEG[i];
-    return {
-      group: g,
-      shadow: s,
-      angleDeg: angleDeg,
-      phaseOffset: i * 0.7,
-      isCenter: angleDeg === 0,
-    };
-  });
-
-  var FLOOR_Y = -TUB_TOTAL_HEIGHT / 2 + 0.005;
-
-  // ===================================================================
-  // CAMERA — adaptive framing based on viewport aspect
-  // ===================================================================
-  // Strategy:
-  //   - Wide (desktop, aspect >= 1.4): use full ARC_RADIUS_BASE (5.5),
-  //     symmetric half-circle, generous framing.
-  //   - Portrait (mobile, < 0.8): compress arc radius AND tighten framing
-  //     so the tubs fill more of the viewport. Increase angle separation
-  //     between inner and outer tubs so all 5 colors stay visible.
-  //
-  // The arc and angles are recomputed on every resize so the layout
-  // responds to orientation changes and window resizes.
-  var TUB_RADIUS = (TUB.diameter / 2) * MM;
-  var FOV_RAD = 38 * Math.PI / 180;
-
-  // Effective angles get rewritten in resize() based on viewport.
-  // On desktop they stay at FAN_ANGLES_DEG; on mobile we adjust them.
-  var effectiveAngles = FAN_ANGLES_DEG.slice();
-
-  function computeAdaptiveLayout(aspect) {
-    // Returns { arcRadius, angles, framingMargin }
-    if (aspect >= 1.4) {
-      // Desktop: full half-circle, generous margin, all 5 tubs visible
-      return {
-        arcRadius: ARC_RADIUS_BASE,
-        angles: [-90, -35, 0, 35, 90],
-        framingMargin: 1.25
-      };
-    }
-    if (aspect <= 0.55) {
-      // Narrow mobile portrait: tight arc but with WIDE inner angles so
-      // the inner tubs actually clear the hero's silhouette. The yellow
-      // tub at 0° gets pushed extra far back so it peeks above the hero
-      // (since x=0 means it's hidden behind in X). Aggressive framing
-      // margin (0.95) means the tubs FILL the viewport with no big gaps.
-      return {
-        arcRadius: 2.4,
-        angles: [-75, -45, 0, 45, 75],
-        framingMargin: 0.95
-      };
-    }
-    // Tablet / square (between 0.55 and 1.4): smooth interpolation
-    var t = (aspect - 0.55) / (1.4 - 0.55);
-    var arcR = 2.4 + (ARC_RADIUS_BASE - 2.4) * t;
-    var outerAng = 75 + (90 - 75) * t;
-    var innerAng = 45 + (35 - 45) * t;
-    var margin = 0.95 + (1.25 - 0.95) * t;
-    return {
-      arcRadius: arcR,
-      angles: [-outerAng, -innerAng, 0, innerAng, outerAng],
-      framingMargin: margin
-    };
-  }
-
-  function distanceToFitVertical(halfH) {
-    return halfH / Math.tan(FOV_RAD / 2);
-  }
-  function distanceToFitHorizontal(halfW, aspect) {
-    var hFov = 2 * Math.atan(Math.tan(FOV_RAD / 2) * aspect);
-    return halfW / Math.tan(hFov / 2);
-  }
-
-  function resize() {
-    var w = stage.clientWidth, h = stage.clientHeight;
-    if (w === 0 || h === 0) return;
-    renderer.setSize(w, h, false);
-    var aspect = w / h;
-    camera.aspect = aspect;
-
-    // Recompute layout for current viewport
-    var layout = computeAdaptiveLayout(aspect);
-    ARC_RADIUS = layout.arcRadius;
-    effectiveAngles = layout.angles;
-    var FRAMING_MARGIN = layout.framingMargin;
-
-    // Update each fan tub's angleDeg + isCenter to match new layout
-    fanTubs.forEach(function(tub, i){
-      tub.angleDeg = effectiveAngles[i];
-      tub.isCenter = effectiveAngles[i] === 0;
-    });
-
-    // World-space bounds of the fanned-out scene at current arc radius.
-    var maxAbsAngle = Math.max.apply(null, effectiveAngles.map(function(a){ return Math.abs(a); }));
-    var fanHalfWidth = Math.abs(Math.sin(maxAbsAngle * Math.PI / 180) * ARC_RADIUS) + TUB_RADIUS;
-    var fanHeight = TUB_TOTAL_HEIGHT + HERO_LIFT + 0.4;
-
-    var distV = distanceToFitVertical((fanHeight / 2) * FRAMING_MARGIN);
-    var distH = distanceToFitHorizontal(fanHalfWidth * FRAMING_MARGIN, aspect);
-    var dist = Math.max(distV, distH) + 1.5;
-
-    // Aim camera at the visual center of the fan, slightly above origin
-    // so the tubs sit in the middle of the canvas (the tubs have their
-    // origin at vertical centre, but the contact shadow extends below,
-    // so a small upward aim balances the composition).
-    camera.position.set(0, 0.3, dist);
-    camera.lookAt(0, 0.1, 0);
-    camera.updateProjectionMatrix();
-  }
-  window.addEventListener('resize', resize);
-  // Also re-resize on orientation change for mobile devices.
-  window.addEventListener('orientationchange', function(){
-    setTimeout(resize, 100);
-  });
-  resize();
-  setTimeout(resize, 100);
-  setTimeout(resize, 500);
-
-  // ===================================================================
-  // SCROLL-DRIVEN PROGRESS
-  // ===================================================================
-  // Animation timing: starts when section's top hits 50% of viewport,
-  // completes when section is 90% scrolled through. Most of the motion
-  // happens while the section is pinned at the top of the viewport.
-  function computeProgress() {
-    var rect = section.getBoundingClientRect();
-    var vh = window.innerHeight;
-    var startY = vh * 0.5;
-    var endY = -(section.offsetHeight - vh) * 0.9;
-    var denom = endY - startY;
-    if (denom === 0) return 0;
-    var raw = (rect.top - startY) / denom;
-    return Math.max(0, Math.min(1, raw));
-  }
-
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  }
-
-  var progress = 0;
-  var targetProgress = 0;
-  function onScroll() { targetProgress = computeProgress(); }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // ===================================================================
-  // ANIMATION LOOP
-  // ===================================================================
-  var clock = new THREE.Clock();
-
-  function update(t, p) {
-    var pEased = easeInOutCubic(p);
-
-    // ----- HERO -----
-    // Hero sits forward in Z, gentle bob, lifts as p grows.
-    var heroBob = Math.sin(t * 1.3) * FLOAT_AMPLITUDE;
-    heroGroup.position.set(0, heroBob + HERO_LIFT * pEased, HERO_Z);
-    heroGroup.rotation.y = 0;
-
-    heroShadow.position.set(0, FLOOR_Y, HERO_Z);
-    var heroLiftAmount = HERO_LIFT * pEased;
-    heroShadow.material.opacity = 1.0 - heroLiftAmount * 1.2;
-    var heroShadowScale = 1.0 + heroLiftAmount * 0.6;
-    heroShadow.scale.set(heroShadowScale, heroShadowScale, 1);
-
-    // ----- FAN TUBS — slide from behind hero to final arc positions -----
-    fanTubs.forEach(function(tub){
-      var finalAngleRad = tub.angleDeg * Math.PI / 180;
-      var finalX = Math.sin(finalAngleRad) * ARC_RADIUS;
-      var finalArcZ = (1 - Math.cos(finalAngleRad)) * ARC_RADIUS * 0.5;
-      var finalExtraZ = tub.isCenter ? CENTER_TUB_EXTRA_Z_PUSH : 0;
-      var finalZ = -FAN_BACK_OFFSET - finalArcZ - finalExtraZ;
-
-      // Start position: behind the hero, far enough back that perspective
-      // shrinks them just inside the hero's silhouette.
-      var startX = 0;
-      var startZ = -2.5;
-
-      var x = startX + (finalX - startX) * pEased;
-      var z = startZ + (finalZ - startZ) * pEased;
-
-      var bob = Math.sin(t * 1.1 + tub.phaseOffset) * FLOAT_AMPLITUDE * pEased;
-      var edgeFactor = Math.abs(tub.angleDeg) / 90;
-      var baseLift = HERO_LIFT * pEased * (0.7 + edgeFactor * 0.4);
-
-      tub.group.position.set(x, bob + baseLift, z);
-      tub.group.rotation.y = -finalAngleRad * 0.4 * pEased;
-      tub.group.scale.set(1, 1, 1);
-
-      tub.shadow.position.set(x, FLOOR_Y, z);
-      tub.shadow.material.opacity = pEased * (1.0 - baseLift * 1.2);
-      var shScale = (0.85 + 0.15 * pEased) * (1 + baseLift * 0.6);
-      tub.shadow.scale.set(shScale, shScale, 1);
-    });
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    progress += (targetProgress - progress) * 0.12;
-    update(clock.getElapsedTime(), progress);
-    renderer.render(scene, camera);
-
-    // Fade in the "keep scrolling" hint over the last 30% of the animation.
-    // Starts fading in at p=0.7, fully visible at p=1.0.
-    if (hintEl) {
-      var hintOpacity = Math.max(0, Math.min(1, (progress - 0.7) / 0.3));
-      hintEl.style.setProperty('--hint-opacity', hintOpacity.toFixed(3));
-    }
-  }
-  animate();
-})();
-</script>
-
-<!-- ============ INTERACTIVE BITS ============ -->
-<script>
-(function(){
-  // 1. Mobile menu toggle
-  var burger = document.getElementById('burger-btn');
-  var nav = document.getElementById('site-nav');
-  if (burger && nav) {
-    burger.addEventListener('click', function(){
-      var isOpen = nav.getAttribute('data-open') === 'true';
-      nav.setAttribute('data-open', isOpen ? 'false' : 'true');
-    });
-    // Close menu when a link is clicked
-    nav.querySelectorAll('a').forEach(function(link){
-      link.addEventListener('click', function(){
-        nav.setAttribute('data-open', 'false');
-      });
-    });
-  }
-
-  // 2. Word-flip animation in hero
-  var flipInner = document.getElementById('word-flip-inner');
-  if (flipInner) {
-    var words = ['earns', 'owns', 'sells', 'launches'];
-    var i = 0;
-    setInterval(function(){
-      i = (i + 1) % words.length;
-      flipInner.style.transform = 'translateY(-' + i + 'em)';
-    }, 2400);
-  }
-
-  // 3. Footer year
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // 4. Accent color rotation — bold variety palette, smooth 2s cycle
-  // The CSS already has 1.2s transitions on all accent elements,
-  // so swapping --accent here fades buttons, italics, highlights, etc.
-  var accentColors = [
-    '#ff5b1f',  // orange
-    '#1f6bff',  // blue
-    '#2bb673',  // green
-    '#e83a3a',  // red
-    '#8a4dff'   // purple
-  ];
-  var accentIndex = 0;
-  setInterval(function(){
-    accentIndex = (accentIndex + 1) % accentColors.length;
-    document.documentElement.style.setProperty('--accent', accentColors[accentIndex]);
-  }, 2000);
-})();
-
-// Conditional form fields — show tub-specific questions (Lids, Material, Sizes)
-// only when Component is "Tubs". Also toggles 'required' on those fields so
-// they don't block submission when hidden.
-(function(){
-  var componentSelects = document.querySelectorAll('[data-component-select]');
-  componentSelects.forEach(function(select){
-    var form = select.closest('form');
-    if (!form) return;
-    var tubFieldGroups = form.querySelectorAll('[data-tub-fields]');
-    if (!tubFieldGroups.length) return;
-    var conditionalRequired = form.querySelectorAll('[data-tub-required]');
-
-    function update() {
-      var isTubs = select.value === 'Tubs';
-      tubFieldGroups.forEach(function(group){
-        group.hidden = !isTubs;
-        // Clear checkboxes inside hidden groups so we don't submit stale data
-        if (!isTubs) {
-          group.querySelectorAll('input[type="checkbox"]').forEach(function(cb){
-            cb.checked = false;
-          });
-        }
-      });
-      conditionalRequired.forEach(function(field){
-        if (isTubs) {
-          field.setAttribute('required', '');
-        } else {
-          field.removeAttribute('required');
-          field.value = '';
-        }
-      });
-    }
-
-    select.addEventListener('change', update);
-    update();
-  });
-})();
-
-// Form submission handler — submits to Formspree via fetch, shows success
-// message in-page instead of redirecting to Formspree's thank-you page.
-// If JavaScript fails, the form still works as a basic HTML POST (graceful fallback).
-(function(){
-  var forms = document.querySelectorAll('form[action^="https://formspree.io"]');
-  forms.forEach(function(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var status = form.querySelector('[data-form-status]');
-      var submitBtn = form.querySelector('button[type="submit"]');
-      var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
-
-      // Disable button + show submitting state
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Sending…';
-      }
-      if (status) {
-        status.hidden = true;
-        status.textContent = '';
-      }
-
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(response){
-        if (response.ok) {
-          // Success: clear form, show thank you
-          form.reset();
-          if (status) {
-            status.hidden = false;
-            status.classList.remove('form-status--error');
-            status.classList.add('form-status--success');
-            status.textContent = 'Thanks — we got your brief and will reply within one business day.';
-          }
-          if (submitBtn) {
-            submitBtn.innerHTML = 'Sent ✓';
-            setTimeout(function(){
-              submitBtn.innerHTML = originalBtnText;
-              submitBtn.disabled = false;
-            }, 3000);
-          }
-        } else {
-          throw new Error('Submission failed');
-        }
-      })
-      .catch(function(){
-        // Error: tell user, re-enable button
-        if (status) {
-          status.hidden = false;
-          status.classList.remove('form-status--success');
-          status.classList.add('form-status--error');
-          status.textContent = 'Something went wrong. Please email contact@nutrapack.co instead.';
-        }
-        if (submitBtn) {
-          submitBtn.innerHTML = originalBtnText;
-          submitBtn.disabled = false;
-        }
-      });
-    });
-  });
-})();
-</script>
-
+<section class="final">
+  <div class="wrap">
+    <span class="kick">48-hour reply · real person</span>
+    <h2 class="title">Ready for launch</h2>
+    <p class="lede">Packaging, printing, design or brand protection: send a brief and get materials, MOQs, lead times and price back in 48 hours.</p>
+    <div class="ctas" style="justify-content:center"><a class="btn btn--solid" href="contact.html">Get a quote →</a><a class="btn" href="how-it-works.html">How it works</a></div>
+  </div>
+</section>
+</main>
+<footer class="ftr">
+  <div class="wrap narrow">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <img src="images/web/logo-white.png" alt="NutraPack" width="54" height="34" loading="lazy">
+        <p style="margin:0">Texas-based packaging, printing and brand protection partner. Custom supplement packaging, label and sticker printing, packaging design and anti-counterfeit security laminations, from 10,000 units.</p>
+      </div>
+      <div><h2>Services</h2><ul>
+        <li><a href="packaging.html">Custom supplement packaging</a></li>
+        <li><a href="printing.html">Label &amp; sticker printing</a></li>
+        <li><a href="printing.html#supplement-labels">Supplement labels</a></li>
+        <li><a href="printing.html#shrink-sleeves">Shrink sleeves</a></li>
+        <li><a href="printing.html#design">Packaging &amp; label design</a></li>
+        <li><a href="security-laminations.html">Security laminations</a></li>
+      </ul></div>
+      <div><h2>Company</h2><ul>
+        <li><a href="how-it-works.html">How it works</a></li>
+        <li><a href="about.html">About NutraPack</a></li>
+        <li><a href="Design.html">3D tub designer</a></li>
+        <li><a href="contact.html">Get a quote</a></li>
+      </ul></div>
+      <div><h2>Contact</h2><ul>
+        <li><span>contact@nutrapack.co</span></li>
+        <li><a href="https://instagram.com/nutrapack.co" rel="me noopener">Instagram @nutrapack.co</a></li>
+        <li><span>Huntsville, Texas · Serving brands across the US</span></li>
+      </ul></div>
+    </div>
+    <div class="ftr__base"><span>© <span id="year">2026</span> NutraPack LLC. All rights reserved.</span><span>Packaging · Printing · Brand protection</span></div>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="js/np-shared.js?v=20261023" defer></script>
+<script src="js/np-holo.js?v=20261023" defer></script>
+<script src="js/site.js?v=20261023" defer></script>
 </body>
 </html>
