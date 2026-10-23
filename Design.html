@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Free 3D Supplement Tub Designer | NutraPack</title>
-<meta name="description" content="Free 3D supplement tub designer: pick 8, 10, 20, 25 or 55 oz, any Pantone color and finish, add your logo and preview your custom tub before you order.">
+<title>3D Supplement Tub Designer | NutraPack</title>
+<meta name="description" content="3D supplement tub designer: pick 8, 10, 20, 25 or 55 oz, any Pantone color and finish, add your logo and preview your custom tub before you order.">
 <link rel="canonical" href="https://nutrapack.co/Design.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NutraPack">
-<meta property="og:title" content="Free 3D Supplement Tub Designer | NutraPack">
-<meta property="og:description" content="Free 3D supplement tub designer: pick 8, 10, 20, 25 or 55 oz, any Pantone color and finish, add your logo and preview your custom tub before you order.">
+<meta property="og:title" content="3D Supplement Tub Designer | NutraPack">
+<meta property="og:description" content="3D supplement tub designer: pick 8, 10, 20, 25 or 55 oz, any Pantone color and finish, add your logo and preview your custom tub before you order.">
 <meta property="og:url" content="https://nutrapack.co/Design.html">
 <meta property="og:image" content="https://nutrapack.co/images/web/og-nutrapack.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -433,7 +433,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .mh { background: rgba(255,255,255,.94); -webkit-backdrop-filter: none; backdrop-filter: none; }
 </style>
 <style>.controls { background: #f5f5f3 !important; color: #0b0b0c; } .stage { background: radial-gradient(ellipse at 50% 45%, #ffffff, #ececea 75%) !important; } .size-pill.active, .finish-btn.active, .logo-effect-btn.active, .download-btn, .btn.glass { color: #fff !important; }</style>
-</head>
+<style>/* phone pass */ .mh { background: #ffffff !important; } @media (max-width: 760px) { .mh nav a { padding: 12px 0; } } @media (max-width: 420px) { .mh nav { letter-spacing: .04em !important; gap: 0 !important; overflow-x: visible !important; } } .mf > * { display: inline-block; padding: 12px 0; } .quote-cta { display: inline-block; padding: 12px 0; } .mh a[aria-label] { display: inline-flex; align-items: center; min-height: 44px; } @media (pointer: coarse), (max-width: 760px) { .logo-size-slider, .label-slider { height: 6px; margin: 12px 0; } .logo-size-slider::-webkit-slider-thumb, .label-slider::-webkit-slider-thumb { width: 26px; height: 26px; } .logo-size-slider::-moz-range-thumb, .label-slider::-moz-range-thumb { width: 22px; height: 22px; } .label-slider-label, .logo-hint, .label-hint { font-size: 12px !important; } }</style></head>
 <body>
 
 <header class="mh">
@@ -454,7 +454,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     <div class="stage-meta">
       <div class="meta-block"><span class="meta-label">Capacity</span><span class="meta-value" id="metaCapacity">20 OZ</span></div>
       <div class="meta-block"><span class="meta-label">Material</span><span class="meta-value">HDPE — MATTE</span></div>
-      <div class="meta-block"><span class="meta-label">Diameter</span><span class="meta-value" id="metaDiameter">89mm Ø</span></div>
+      <div class="meta-block"><span class="meta-label">Diameter</span><span class="meta-value" id="metaDiameter">89 mm</span></div>
     </div>
   </section>
 
@@ -787,7 +787,7 @@ function buildTub(sizeKey) {
   contactShadow.scale.set(shadowScale, shadowScale, 1);
 
   document.getElementById('metaCapacity').textContent = s.label;
-  document.getElementById('metaDiameter').textContent = s.diameter + 'mm Ø';
+  document.getElementById('metaDiameter').textContent = s.diameter + ' mm';
   const sizeSlider = document.getElementById('logoSizeSlider');
   if (sizeSlider) sizeSlider.dispatchEvent(new Event('input'));
 }
@@ -1396,8 +1396,8 @@ animate();
 </script>
 
 <section class="seo-copy" style="max-width:820px;margin:0 auto;padding:56px 24px 40px;color:var(--ink);font-family:var(--ui);line-height:1.6">
-  <h2 style="font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;font-size:28px;margin:0 0 12px">Free 3D supplement tub designer</h2>
-  <p style="margin:0 0 12px;color:var(--ink-soft)">See your custom supplement tub before anything is made. Pick one of five sizes (8, 10, 20, 25 or 55 oz), choose any Pantone color for the body and the lid, pick a matte or gloss finish, and upload your logo to preview it embossed or debossed on the lid. You can also place your own label artwork on the tub and turn it in 3D to check how it wraps.</p>
+  <h2 style="font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;font-size:28px;margin:0 0 12px">3D supplement tub designer</h2>
+  <p style="margin:0 0 12px;color:var(--ink-soft)">See your custom supplement tub before anything is made. Pick one of five sizes (8, 10, 20, 25 or 55 oz), choose any Pantone color for the body and the lid, pick a matte or metalized lid finish, and upload your logo to preview it embossed or debossed on the lid. You can also place your own label artwork on the tub and turn it in 3D to check how it wraps.</p>
   <p style="margin:0 0 12px;color:var(--ink-soft)">When you like what you see, download a high-resolution image for your team, or send it to us with a brief. A real person replies with materials, MOQ tiers, lead times and price for the tub you designed.</p>
   <p style="margin:0"><a href="packaging.html" style="color:inherit">Custom supplement packaging</a> · <a href="printing.html" style="color:inherit">Label printing</a> · <a href="contact.html" style="color:inherit">Get a quote</a></p>
 </section>

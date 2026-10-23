@@ -484,11 +484,11 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .fgrid .lbl { position: relative; aspect-ratio: 16 / 10; border-radius: 10px; box-shadow: 0 18px 36px rgba(0,0,0,0.150), inset 0 0 0 1px rgba(0,0,0,.06); will-change: transform; }
 .fgrid .lbl canvas, .fgrid .mini canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: inherit; }
 .fgrid .lbl::after, .fgrid .mini::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(0,0,0,.32) var(--gx, 50%), transparent 65%); mix-blend-mode: soft-light; }
-.fgrid .angles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: -2px; }
+.fgrid .angles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: -2px; }
 .fgrid .mini { position: relative; aspect-ratio: 16 / 10; border-radius: 6px; box-shadow: 0 8px 16px rgba(0,0,0,0.120), inset 0 0 0 1px rgba(0,0,0,.06); }
-.fgrid .angles-cap { margin: -8px 0 0; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-3); text-align: center; }
+.fgrid .angles-cap { margin: -8px 0 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-3); text-align: center; }
 .fgrid .meta { display: flex; flex-direction: column; gap: 4px; }
-.fgrid .meta .n { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-3); }
+.fgrid .meta .n { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-3); }
 .fgrid .meta h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: .03em; text-transform: uppercase; }
 .fgrid .meta p { margin: 0; color: var(--fg-2); font-size: 14px; }
 
@@ -529,6 +529,13 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .cat__vis--sec .lbl canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: 10px; }
 .cat__vis--sec .lbl::after { content: ""; position: absolute; inset: 0; border-radius: 10px; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(0,0,0,.4) var(--gx, 50%), transparent 65%); mix-blend-mode: soft-light; }
 .fgrid .lbl img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
+
+/* phone pass: bigger tap targets */
+@media (max-width: 760px) {
+  #dial button { min-height: 44px; }
+  .ftr a[href^="mailto:"], footer a[href^="mailto:"] { display: inline-block; padding: 12px 0; }
+  .hdr__logo { display: inline-flex; align-items: center; min-height: 44px; }
+}
 
 /* ---- white concept tweaks ---- */
 .blob { mix-blend-mode: multiply; opacity: .22 !important; filter: blur(110px); }

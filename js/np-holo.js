@@ -219,7 +219,7 @@
     canvas.className = 'nph-canvas'; canvas.setAttribute('aria-hidden', 'true');
     stage.appendChild(canvas);
     var r = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-    r.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    r.setPixelRatio(Math.min(window.innerWidth < 760 ? 1.5 : 2, window.devicePixelRatio || 1));
     r.outputEncoding = THREE.sRGBEncoding;
     r.toneMapping = THREE.ACESFilmicToneMapping;
     r.setClearColor(0x000000, 0);
@@ -705,22 +705,30 @@
     var rim = new THREE.DirectionalLight(0xffffff, 1.6); rim.position.set(-3, 3, -5); scene.add(rim);
     var rim2 = new THREE.DirectionalLight(0xbfd4ff, 0.9); rim2.position.set(4, 1, -4); scene.add(rim2);
 
-    var items = [
-      { make: makeTub, h: 2.15 }, { make: makeCan, h: 2.35 },
-      { make: makeBottle, h: 2.6 }, { make: makeLabel, h: 2.05 }
-    ].map(function (it) { var g = normalize(it.make(), it.h); g.visible = false; scene.add(g); return g; });
-    var holos = []; scene.traverse(function (m) { if (m.material && m.material.uniforms && m.material.uniforms.uTime) holos.push(m.material); });
-    var tickers = items.map(function (it) { var fns = []; it.traverse(function (o) { if (o.userData.tick) fns.push(o.userData.tick); }); return fns; });
+    // Products are built one at a time: the first right away, the rest in idle time, each compiled
+    // before its turn so phones don't stall the first time a product appears.
+    var specs = [{ make: makeTub, h: 2.15 }, { make: makeCan, h: 2.35 }, { make: makeBottle, h: 2.6 }, { make: makeLabel, h: 2.05 }];
+    var items = specs.map(function () { return null; }), holos = [], tickers = specs.map(function () { return []; });
+    function build(i) {
+      if (items[i]) return items[i];
+      var g = normalize(specs[i].make(), specs[i].h); scene.add(g); items[i] = g;
+      g.traverse(function (m) { if (m.material && m.material.uniforms && m.material.uniforms.uTime && holos.indexOf(m.material) < 0) holos.push(m.material); if (m.userData.tick) tickers[i].push(m.userData.tick); });
+      g.visible = true; try { renderer.compile(scene, camera); } catch (e) {} g.visible = false;
+      return g;
+    }
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 250); };
+    function buildRest(i) { if (i >= specs.length) return; idle(function () { build(i); buildRest(i + 1); }, { timeout: 1500 }); }
+    build(0); buildRest(1);
 
     var cur = 0, prev = -1, tickAt = 0, DUR = 420, t0 = performance.now();
     items[0].visible = true;
     if (o.onTick) o.onTick(0);
     function tick(now) {
       prev = cur; cur = (cur + 1) % items.length; tickAt = now;
-      items[cur].visible = true;
+      build(cur).visible = true;
       if (o.onTick) o.onTick(cur);
     }
-    function goTo(i) { if (i === cur) return; prev = cur; cur = i; tickAt = performance.now(); items.forEach(function (g, k) { g.visible = k === cur || k === prev; }); if (o.onTick) o.onTick(cur); }
+    function goTo(i) { if (i === cur) return; build(i); prev = cur; cur = i; tickAt = performance.now(); items.forEach(function (g, k) { if (g) g.visible = k === cur || k === prev; }); if (o.onTick) o.onTick(cur); }
     // tick on even wall-clock seconds, like a clock
     var period = o.period || 2000;
     var next = Math.ceil(Date.now() / period) * period;
@@ -736,6 +744,7 @@
       tickers[cur].forEach(function (f) { f(t); });
       // hard cut: the next product snaps in on the tick, no tween
       items.forEach(function (g, i) {
+        if (!g) return;
         g.visible = i === cur;
         if (i === cur) { g.scale.setScalar(1); g.rotation.y = Math.sin(t * 0.8) * 0.35 + 0.35; g.rotation.x = 0.06; }
       });

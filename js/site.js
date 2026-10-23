@@ -18,6 +18,20 @@
   function solid() { if (hdr) hdr.classList.toggle('is-solid', window.scrollY > 40); }
   solid(); window.addEventListener('scroll', solid, { passive: true });
 
+  // 3D starts only once the page has loaded and the browser is idle, and only when its section is
+  // on (or near) screen, so text and buttons are usable first on phones.
+  function when3D(el, fn) {
+    var started = false;
+    function go() { if (started) return; started = true; fn(); }
+    function idle() { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(watch, { timeout: 2500 }); }
+    function watch() {
+      if (!('IntersectionObserver' in window)) return go();
+      var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); go(); } }, { rootMargin: '400px 0px' });
+      io.observe(el);
+    }
+    if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+  }
+
   // Ticking product hero
   var ticker = document.getElementById('ticker');
   if (ticker && window.NPH) {
@@ -33,14 +47,14 @@
       b.addEventListener('click', function () { if (api) api.goTo(i); });
       return b;
     });
-    api = window.NPH.mountTicker({
+    when3D(ticker, function () { api = window.NPH.mountTicker({
       stage: ticker,
       onTick: function (i) {
         active = i; cat.textContent = P[i][0]; name.textContent = P[i][1];
         bars.forEach(function (b, k) { b.setAttribute('aria-current', k === i ? 'true' : 'false'); b.querySelector('i').style.width = k < i ? '100%' : '0'; });
       },
       onProgress: function (f) { bars[active].querySelector('i').style.width = (Math.max(0, Math.min(1, f)) * 100).toFixed(1) + '%'; }
-    });
+    }); });
   }
 
   // Security seal: original vs photocopy
@@ -51,10 +65,11 @@
       orig: 'Original: the foil shifts color and depth as it tilts. The loupe shows micro text a copier can’t hold. Move over the seal to read it.',
       copy: 'Photocopy: the holographic shift is gone, the micro text turns to mush, and a hidden VOID pattern shows up.'
     };
-    var seal = window.NPH.mountSeal({
+    var seal = null;
+    when3D(sealStage, function () { seal = window.NPH.mountSeal({
       stage: sealStage,
       onMode: function (m) { cap.textContent = text[m]; bo.setAttribute('aria-pressed', String(m === 'orig')); bc.setAttribute('aria-pressed', String(m === 'copy')); }
-    });
+    }); });
     [].forEach.call(document.querySelectorAll('.shape-picks [data-shape]'), function (b, i, all) {
       b.addEventListener('click', function () { if (!seal) return; seal.setShape(b.dataset.shape); [].forEach.call(all, function (x) { x.setAttribute('aria-pressed', String(x === b)); }); });
     });
@@ -65,12 +80,12 @@
   // Scroll tub lineup
   var run = document.getElementById('lineup');
   if (run && window.NP) {
-    window.NP.mount({
+    when3D(run, function () { window.NP.mount({
       section: run, stage: document.getElementById('stage'),
       // 20 oz stays black; the rest use Pantone 185 C, 165 C, 354 C and 285 C
       colors: ['#e4002b', '#ff671f', '#0a0a0a', '#00b140', '#0072ce'],
       key: 1.35, ambient: 0.22, light: 'dramatic', exposure: 1.25, heroScale: 0.36
-    });
+    }); });
   }
 
   // Quote form: tub-only questions + in-page Formspree submit

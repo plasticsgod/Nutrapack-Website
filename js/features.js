@@ -315,8 +315,8 @@
     var lbl = el.querySelector('.lbl'), cv = lbl.querySelector('canvas'), x = cv.getContext('2d'), tl = { x: 0, y: 0 }, tg = null, ph = Math.random() * 6;
     var strip = document.createElement('div'); strip.className = 'angles'; strip.setAttribute('aria-hidden', 'true');
     var single = el.dataset.minis === '0';
-    var minis = (single ? [] : [-0.55, 0, 0.55]).map(function (off, mi) { var m = document.createElement('div'); m.className = 'mini'; var c = document.createElement('canvas'); m.appendChild(c); strip.appendChild(m); return { off: off, k: mi + 1, cv: c, x: c.getContext('2d'), el: m }; });
-    var cap = document.createElement('p'); cap.className = 'angles-cap'; cap.textContent = 'Same label, three angles';
+    var minis = (single ? [] : [-0.85, 0.85]).map(function (off, mi) { var m = document.createElement('div'); m.className = 'mini'; var c = document.createElement('canvas'); m.appendChild(c); strip.appendChild(m); return { off: off, k: mi + 1, cv: c, x: c.getContext('2d'), el: m }; });
+    var cap = document.createElement('p'); cap.className = 'angles-cap'; cap.textContent = 'Same label, two angles';
     if (!single) { lbl.insertAdjacentElement('afterend', strip); strip.insertAdjacentElement('afterend', cap); }
     function size(c) { var b = c.getBoundingClientRect(); c.width = Math.max(1, b.width * DPR); c.height = Math.max(1, b.height * DPR); }
     function sizeAll() { size(cv); minis.forEach(function (m) { size(m.cv); }); }
@@ -335,7 +335,7 @@
       lbl.style.transform = 'perspective(800px) rotateY(' + (tl.x * 16) + 'deg) rotateX(' + (-tl.y * 10) + 'deg)';
       lbl.style.setProperty('--gx', (50 + tl.x * 45) + '%');
       paint(cv, x, tl, t);
-      minis.forEach(function (m) { var ang = { x: Math.max(-1, Math.min(1, tl.x + m.off)), y: tl.y, k: m.k }; m.el.style.transform = 'perspective(400px) rotateY(' + (ang.x * 16) + 'deg)'; m.el.style.setProperty('--gx', (50 + ang.x * 45) + '%'); paint(m.cv, m.x, ang, t); });
+      minis.forEach(function (m) { var ang = { x: Math.max(-1, Math.min(1, m.off + tl.x * 0.15)), y: tl.y, k: m.k }; m.el.style.transform = 'perspective(400px) rotateY(' + (ang.x * 16) + 'deg)'; m.el.style.setProperty('--gx', (50 + ang.x * 45) + '%'); paint(m.cv, m.x, ang, t); });
     };
   });
   function loop(now) { requestAnimationFrame(loop); tiles.forEach(function (el) { var b = el.getBoundingClientRect(); if (b.bottom > 0 && b.top < innerHeight) el._draw(now); }); }
