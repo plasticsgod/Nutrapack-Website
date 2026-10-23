@@ -1,202 +1,453 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Get a Packaging &amp; Printing Quote in 48 Hours | NutraPack</title>
-<meta name="description" content="Send a brief for custom packaging, supplement labels, stickers, shrink sleeves or security labels. A real person replies within 48 hours.">
-<link rel="canonical" href="https://nutrapack.co/contact.html">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#000000">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="NutraPack">
-<meta property="og:title" content="Get a Packaging &amp; Printing Quote in 48 Hours | NutraPack">
-<meta property="og:description" content="Send a brief for custom packaging, supplement labels, stickers, shrink sleeves or security labels. A real person replies within 48 hours.">
-<meta property="og:url" content="https://nutrapack.co/contact.html">
-<meta property="og:image" content="https://nutrapack.co/images/web/og-nutrapack.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Get a Packaging &amp; Printing Quote in 48 Hours | NutraPack">
-<meta name="twitter:description" content="Send a brief for custom packaging, supplement labels, stickers, shrink sleeves or security labels. A real person replies within 48 hours.">
-<meta name="twitter:image" content="https://nutrapack.co/images/web/og-nutrapack.jpg">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — NutraPack</title>
+<!-- Favicon -->
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/favicon.png">
+<meta name="description" content="Send a brief, get a quote in 48 hours. Real human reply, no interrogation.">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;family=Barlow+Semi+Condensed:wght@600;700&amp;display=swap">
-<link rel="stylesheet" href="css/site.css?v=20261023">
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@graph": [
-  {
-   "@type": "Organization",
-   "@id": "https://nutrapack.co/#org",
-   "name": "NutraPack",
-   "legalName": "NutraPack LLC",
-   "url": "https://nutrapack.co/",
-   "logo": "https://nutrapack.co/images/web/logo.png",
-   "image": "https://nutrapack.co/images/web/og-nutrapack.jpg",
-   "email": "contact@nutrapack.co",
-   "description": "Texas-based packaging, printing and brand protection partner: custom supplement tubs and pouches, label, sticker and shrink sleeve printing, packaging design and anti-counterfeit security laminations.",
-   "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Huntsville",
-    "addressRegion": "TX",
-    "addressCountry": "US"
-   },
-   "areaServed": {
-    "@type": "Country",
-    "name": "United States"
-   },
-   "sameAs": [
-    "https://instagram.com/nutrapack.co"
-   ],
-   "knowsAbout": [
-    "custom supplement packaging",
-    "supplement label printing",
-    "custom sticker printing",
-    "shrink sleeve labels",
-    "packaging design",
-    "label design",
-    "Pantone color matching",
-    "anti-counterfeit labels",
-    "holographic security labels"
-   ]
-  },
-  {
-   "@type": "BreadcrumbList",
-   "itemListElement": [
-    {
-     "@type": "ListItem",
-     "position": 1,
-     "name": "Home",
-     "item": "https://nutrapack.co/"
-    },
-    {
-     "@type": "ListItem",
-     "position": 2,
-     "name": "Get a quote",
-     "item": "https://nutrapack.co/contact.html"
-    }
-   ]
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=geist@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css?v=16">
+
+<style>
+  /* Contact-page-specific layout */
+  .contact-hero {
+    padding: clamp(80px, 10vw, 140px) var(--pad) clamp(40px, 5vw, 60px);
+    border-bottom: 1px solid var(--hairline);
+    max-width: var(--maxw);
+    margin: 0 auto;
   }
- ]
-}
-</script>
+  .contact-hero__eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .contact-hero__eyebrow .star {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .contact-hero h1 {
+    font-family: var(--display);
+    font-size: clamp(48px, 8vw, 120px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    max-width: 14ch;
+  }
+  .contact-hero h1 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    text-transform: none;
+    letter-spacing: -0.03em;
+  }
+  .contact-hero p {
+    font-family: var(--ui);
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 56ch;
+  }
+
+  .contact-info {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 60px) var(--pad);
+    border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hairline);
+  }
+  .contact-info__cell {
+    background: var(--bg);
+    padding: 32px 0;
+  }
+  .contact-info__label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 12px;
+  }
+  .contact-info__value {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.4vw, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .contact-info__value a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    transition: color 1200ms cubic-bezier(.4,0,.2,1), border-color 1200ms cubic-bezier(.4,0,.2,1);
+  }
+  .contact-info__value a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 800px) {
+    .contact-info {
+      grid-template-columns: 1fr;
+    }
+    .contact-info__cell { padding: 24px 0; }
+  }
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="hdr">
-  <div class="wrap">
-    <a class="hdr__logo" href="/" aria-label="NutraPack home"><img src="images/web/logo-white.png" alt="NutraPack" width="58" height="36"></a>
-    <nav id="nav" data-open="false" aria-label="Main"><a href="packaging.html">Packaging</a><a href="printing.html">Printing</a><a href="security-laminations.html">Security labels</a><a href="Design.html">Tub designer</a><a href="about.html">About</a></nav>
-    <div class="hdr__right">
-      <a class="btn" href="contact.html">Get a quote</a>
-      <button class="burger" id="burger" type="button" aria-label="Menu" aria-controls="nav" aria-expanded="false"><span></span></button>
+
+<div class="page">
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="site-header" id="top">
+    <a href="index.html" class="site-header__brand">
+      <img src="images/nutapack@300x.png" alt="NutraPack" class="site-header__logo">
+    </a>
+    <nav class="site-header__nav" id="site-nav" data-open="false">
+      <a href="index.html" class="site-header__link">Home</a>
+      <a href="Design.html" class="site-header__link">Design</a>
+      <a href="how-it-works.html" class="site-header__link">How It Works</a>
+      <a href="about.html" class="site-header__link">About us</a>
+    </nav>
+    <a href="#contact-form" class="site-header__cta" aria-current="page">
+      Send a brief<span class="site-header__cta-arrow">→</span>
+    </a>
+    <button class="site-header__burger" aria-label="Menu" id="burger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ CONTACT HERO ============ -->
+  <section class="contact-hero">
+    <div class="contact-hero__eyebrow">
+      <span class="star"></span>
+      Start a project
+    </div>
+    <h1>Send a brief. <em>Get a quote in 48 hours.</em></h1>
+    <p>A real human reply with materials, MOQs, lead times and price — written by your account lead, not a form-letter bot.</p>
+  </section>
+
+  <!-- ============ CONTACT INFO STRIP ============ -->
+  <div class="contact-info">
+    <div class="contact-info__cell">
+      <div class="contact-info__label">Email</div>
+      <div class="contact-info__value"><a href="mailto:contact@nutrapack.co">contact@nutrapack.co</a></div>
+    </div>
+    <div class="contact-info__cell">
+      <div class="contact-info__label">Reply time</div>
+      <div class="contact-info__value">48 hours</div>
+    </div>
+    <div class="contact-info__cell">
+      <div class="contact-info__label">Coverage</div>
+      <div class="contact-info__value">Worldwide</div>
     </div>
   </div>
-</header>
-<main id="main">
-<section class="phero">
-  <div class="wrap narrow">
-    <ol class="crumbs" aria-label="Breadcrumb"><li><a href="/">Home</a></li><li aria-current="page">Get a quote</li></ol>
-    <h1><span class="kick">Get a quote</span> <span class="title">Send a brief. Get a quote in 48 hours.</span></h1>
-    <p class="lede">Packaging, label and sticker printing, design or security laminations. A real reply with materials, MOQs, lead times and price, written by your account lead.</p>
-  </div>
-</section>
 
-<section class="band">
-  <div class="wrap narrow">
-    <div class="split" style="align-items:start">
-      <div class="head" style="gap:24px">
-        <dl class="contact-facts">
-          <div><dt>Email</dt><dd>contact@nutrapack.co</dd></div>
-          <div><dt>Reply time</dt><dd>48 hours</dd></div>
-          <div><dt>Coverage</dt><dd>Worldwide</dd></div>
-        </dl>
-        <h2 class="title title--sm">What you'll get back</h2>
-        <ul class="feats">
-          <li><span>Materials, MOQ tiers and lead times</span></li>
-          <li><span>Print production handled across our supplier network</span></li>
-          <li><span>A direct line to your account lead, no ticket queues</span></li>
-          <li><span>A sample box on approved briefs, on us</span></li>
+  <!-- ============ FORM SECTION ============ -->
+  <section class="section" id="contact-form">
+    <div class="section__head">
+      <div>
+        <div class="section__kicker"><span class="star"></span>Project brief</div>
+        <h2 class="section__h2">Tell us what you're <em>launching.</em></h2>
+      </div>
+      <p class="section__lede">The more you tell us, the better the first reply. Aim for a paragraph, not a novel.</p>
+    </div>
+
+    <div class="quote-wrap section__inner">
+      <div class="quote-left">
+        <h3>What you'll get back<br /><em>within 48 hours.</em></h3>
+        <p class="lede">A full quote with materials, MOQ tiers, lead times and unit cost — written by your account lead, not a form-letter bot.</p>
+        <ul class="quote-bullets">
+          <li>Materials, MOQs and lead times</li>
+          <li>Print production handled across our supplier network</li>
+          <li>Direct line to your account lead — no ticket queues</li>
+          <li>Sample box on approved briefs, on us</li>
         </ul>
       </div>
-      <form class="form" id="quote-form" action="https://formspree.io/f/xqenoayb" method="POST">
-        <input type="hidden" name="_subject" value="New project brief — Contact page">
+      <form class="quote-form" id="brief-form" action="https://formspree.io/f/xqenoayb" method="POST">
+        <input type="hidden" name="_subject" value="New project brief — Contact form">
         <input type="hidden" name="form_source" value="Contact page">
-        <label class="field"><span>Name</span><input id="f-name" type="text" name="name" placeholder="Jane Founder" autocomplete="name" required></label>
-        <label class="field"><span>Brand</span><input id="f-brand" type="text" name="brand" placeholder="Daybreak Wellness" autocomplete="organization"></label>
-        <label class="field full-row"><span>Email</span><input id="f-email" type="email" name="email" placeholder="jane@daybreak.co" autocomplete="email" required></label>
-        <label class="field"><span>What do you need?</span>
-          <select id="f-component" name="component" data-component-select required>
-            <option value="" disabled selected>Select…</option>
-            <option>Tubs</option><option>Supplement or product labels</option><option>Custom stickers</option><option>Shrink sleeves</option>
-            <option>Gusset bag</option><option>Paper tube</option><option>Stick pack</option><option>Cosmetic packaging</option>
-            <option>Security laminations</option><option>Label or packaging design</option><option>Not sure yet</option>
-          </select></label>
-        <label class="field"><span>Quantity</span>
-          <select id="f-qty" name="quantity" required>
-            <option value="" disabled selected>Select…</option><option>Under 10,000</option><option>10,000 – 20,000</option><option>20,000 – 50,000</option><option>50,000+</option>
-          </select></label>
-        <label class="field" data-tub-fields hidden><span>Need lids?</span>
-          <select id="f-lids" name="lids" data-tub-required><option value="" disabled selected>Select…</option><option>Yes</option><option>No</option></select></label>
-        <label class="field" data-tub-fields hidden><span>Material</span>
-          <select id="f-material" name="material" data-tub-required><option value="" disabled selected>Select…</option><option>PET</option><option>HDPE</option><option>Not sure</option></select></label>
-        <fieldset class="field full-row" data-tub-fields hidden><legend>Sizes (select one or more)</legend>
-          <div class="checks">
-            <label><input type="checkbox" name="sizes" value="8oz">8 oz</label><label><input type="checkbox" name="sizes" value="10oz">10 oz</label>
-            <label><input type="checkbox" name="sizes" value="20oz">20 oz</label><label><input type="checkbox" name="sizes" value="25oz">25 oz</label>
-            <label><input type="checkbox" name="sizes" value="55oz">55 oz</label>
-          </div></fieldset>
-        <label class="field"><span>Timeframe</span>
-          <select id="f-time" name="timeframe" required><option value="" disabled selected>Select…</option><option>Less than 1 month</option><option>1-3 months</option><option>3-6 months</option><option>6+ months</option></select></label>
-        <label class="field"><span>Color preference</span><input id="f-color" type="text" name="color" placeholder="Pantone 185 C, matte black…"></label>
-        <label class="field full-row"><span>Shipping location</span><input id="f-ship" type="text" name="shipping_location" placeholder="City, state or country" required></label>
-        <label class="field full-row"><span>Anything else? (optional)</span><textarea id="f-notes" name="message" placeholder="Product, label size, finish, links to artwork…"></textarea></label>
-        <div class="full-row" style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
-          <button class="btn btn--solid" type="submit">Send brief →</button>
-          <span class="form-note">We reply within 48 hours. No spam, ever.</span>
-          <div class="form-status" data-form-status role="status" hidden></div>
+        <div class="quote-row">
+          <label class="quote-field"><span>Name</span><input type="text" name="name" placeholder="Jane Founder" required /></label>
+          <label class="quote-field"><span>Brand</span><input type="text" name="brand" placeholder="Daybreak Wellness" /></label>
         </div>
+        <label class="quote-field"><span>Email</span><input type="email" name="email" placeholder="jane@daybreak.co" required /></label>
+        <div class="quote-row">
+          <label class="quote-field">
+            <span>Component</span>
+            <select name="component" data-component-select required>
+              <option value="" disabled selected>Select…</option>
+              <option>Tubs</option>
+              <option>Pressure-sensitive label</option>
+              <option>Gusset bag</option>
+              <option>Paper tube</option>
+              <option>Stick pack</option>
+              <option>Cosmetic packaging</option>
+            </select>
+          </label>
+          <label class="quote-field">
+            <span>Quantity</span>
+            <select name="quantity" required>
+              <option value="" disabled selected>Select…</option>
+              <option>10,000 – 20,000</option>
+              <option>20,000 – 50,000</option>
+              <option>50,000+</option>
+            </select>
+          </label>
+        </div>
+        <div class="quote-row quote-tub-fields" data-tub-fields hidden>
+          <label class="quote-field">
+            <span>Need lids?</span>
+            <select name="lids" data-tub-required>
+              <option value="" disabled selected>Select…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </label>
+          <label class="quote-field">
+            <span>Material</span>
+            <select name="material" data-tub-required>
+              <option value="" disabled selected>Select…</option>
+              <option>PET</option>
+              <option>HDPE</option>
+              <option>Not sure</option>
+            </select>
+          </label>
+        </div>
+        <fieldset class="quote-field quote-checkboxes" data-tub-fields hidden>
+          <legend><span>Sizes (select one or more)</span></legend>
+          <div class="quote-checkboxes__group">
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="8oz"><span>8oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="10oz"><span>10oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="20oz"><span>20oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="25oz"><span>25oz</span></label>
+            <label class="quote-checkbox"><input type="checkbox" name="sizes" value="55oz"><span>55oz</span></label>
+          </div>
+        </fieldset>
+        <div class="quote-row">
+          <label class="quote-field">
+            <span>Timeframe</span>
+            <select name="timeframe" required>
+              <option value="" disabled selected>Select…</option>
+              <option>Less than 1 month</option>
+              <option>1-3 months</option>
+              <option>3-6 months</option>
+              <option>6+ months</option>
+            </select>
+          </label>
+          <label class="quote-field"><span>Color preference</span><input type="text" name="color" placeholder="Pantone 185 C, matte black, etc." /></label>
+        </div>
+        <label class="quote-field"><span>Shipping location</span><input type="text" name="shipping_location" placeholder="Where should it ship? (city, state/country, or full address)" required /></label>
+        <button type="submit" class="btn btn--primary btn--block">Send brief<span class="btn__arrow">→</span></button>
+        <div class="quote-small">We reply within one business day. No spam, ever.</div>
+        <div class="form-status" data-form-status hidden></div>
       </form>
     </div>
-  </div>
-</section>
-</main>
-<footer class="ftr">
-  <div class="wrap narrow">
-    <div class="ftr__top">
-      <div class="ftr__brand">
-        <img src="images/web/logo-white.png" alt="NutraPack" width="54" height="34" loading="lazy">
-        <p style="margin:0">Texas-based packaging, printing and brand protection partner. Custom supplement packaging, label and sticker printing, packaging design and anti-counterfeit security laminations, from 10,000 units.</p>
+  </section>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div class="site-footer__wordmark">NutraPack</div>
+        <p class="site-footer__tag">Custom packaging for emerging supplement &amp; wellness brands. Designed, sourced, shipped — from 10,000 MOQ.</p>
       </div>
-      <div><h2>Services</h2><ul>
-        <li><a href="packaging.html">Custom supplement packaging</a></li>
-        <li><a href="printing.html">Label &amp; sticker printing</a></li>
-        <li><a href="printing.html#supplement-labels">Supplement labels</a></li>
-        <li><a href="printing.html#shrink-sleeves">Shrink sleeves</a></li>
-        <li><a href="printing.html#design">Packaging &amp; label design</a></li>
-        <li><a href="security-laminations.html">Security laminations</a></li>
-      </ul></div>
-      <div><h2>Company</h2><ul>
-        <li><a href="how-it-works.html">How it works</a></li>
-        <li><a href="about.html">About NutraPack</a></li>
-        <li><a href="Design.html">3D tub designer</a></li>
-        <li><a href="contact.html">Get a quote</a></li>
-      </ul></div>
-      <div><h2>Contact</h2><ul>
-        <li><span>contact@nutrapack.co</span></li>
-        <li><a href="https://instagram.com/nutrapack.co" rel="me noopener">Instagram @nutrapack.co</a></li>
-        <li><span>Huntsville, Texas · Serving brands across the US</span></li>
-      </ul></div>
+      <div class="site-footer__cols">
+        <div class="site-footer__col">
+          <div class="site-footer__h">Site</div>
+          <a href="index.html">Home</a>
+          <a href="Design.html">Design</a>
+          <a href="how-it-works.html">How It Works</a>
+          <a href="about.html">About us</a>
+        </div>
+        <div class="site-footer__col">
+          <div class="site-footer__h">Capabilities</div>
+          <a href="Design.html">Open the Tub Designer</a>
+          <a href="index.html#catalog">Pressure-sensitive labels</a>
+          <a href="index.html#catalog">Gusset bags &amp; tubes</a>
+          <a href="index.html#catalog">Stick packs</a>
+        </div>
+        <div class="site-footer__col">
+          <div class="site-footer__h">Contact</div>
+          <a href="mailto:contact@nutrapack.co">contact@nutrapack.co</a>
+          <a href="contact.html">Contact us</a>
+          <a href="https://instagram.com/nutrapack.co" target="_blank" rel="noopener noreferrer" class="site-footer__social">
+            <svg class="site-footer__social-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+            </svg>
+            <span>@nutrapack.co</span>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="ftr__base"><span>© <span id="year">2026</span> NutraPack LLC. All rights reserved.</span><span>Packaging · Printing · Brand protection</span></div>
-  </div>
-</footer>
-<script src="js/site.js?v=20261023" defer></script>
+    <div class="site-footer__bottom">
+      <span>© <span id="year">2026</span> NutraPack. All rights reserved.</span>
+      <span class="site-footer__star"></span>
+      <span>Made with intention.</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // Mobile menu toggle
+  var burger = document.getElementById('burger-btn');
+  var nav = document.getElementById('site-nav');
+  if (burger && nav) {
+    burger.addEventListener('click', function(){
+      var isOpen = nav.getAttribute('data-open') === 'true';
+      nav.setAttribute('data-open', isOpen ? 'false' : 'true');
+    });
+    nav.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        nav.setAttribute('data-open', 'false');
+      });
+    });
+  }
+  // Footer year
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Accent color rotation — same as homepage, smooth 2s cycle
+  var accentColors = [
+    '#ff5b1f',  // orange
+    '#1f6bff',  // blue
+    '#2bb673',  // green
+    '#e83a3a',  // red
+    '#8a4dff'   // purple
+  ];
+  var accentIndex = 0;
+  setInterval(function(){
+    accentIndex = (accentIndex + 1) % accentColors.length;
+    document.documentElement.style.setProperty('--accent', accentColors[accentIndex]);
+  }, 2000);
+})();
+
+// Conditional form fields — show tub-specific questions (Lids, Material, Sizes)
+// only when Component is "Tubs". Also toggles 'required' on those fields so
+// they don't block submission when hidden.
+(function(){
+  var componentSelects = document.querySelectorAll('[data-component-select]');
+  componentSelects.forEach(function(select){
+    var form = select.closest('form');
+    if (!form) return;
+    var tubFieldGroups = form.querySelectorAll('[data-tub-fields]');
+    if (!tubFieldGroups.length) return;
+    var conditionalRequired = form.querySelectorAll('[data-tub-required]');
+
+    function update() {
+      var isTubs = select.value === 'Tubs';
+      tubFieldGroups.forEach(function(group){
+        group.hidden = !isTubs;
+        // Clear checkboxes inside hidden groups so we don't submit stale data
+        if (!isTubs) {
+          group.querySelectorAll('input[type="checkbox"]').forEach(function(cb){
+            cb.checked = false;
+          });
+        }
+      });
+      conditionalRequired.forEach(function(field){
+        if (isTubs) {
+          field.setAttribute('required', '');
+        } else {
+          field.removeAttribute('required');
+          field.value = '';
+        }
+      });
+    }
+
+    select.addEventListener('change', update);
+    update();
+  });
+})();
+
+// Form submission handler — submits to Formspree via fetch, shows success
+// message in-page instead of redirecting to Formspree's thank-you page.
+// If JavaScript fails, the form still works as a basic HTML POST (graceful fallback).
+(function(){
+  var forms = document.querySelectorAll('form[action^="https://formspree.io"]');
+  forms.forEach(function(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var status = form.querySelector('[data-form-status]');
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending…';
+      }
+      if (status) {
+        status.hidden = true;
+        status.textContent = '';
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response){
+        if (response.ok) {
+          form.reset();
+          if (status) {
+            status.hidden = false;
+            status.classList.remove('form-status--error');
+            status.classList.add('form-status--success');
+            status.textContent = 'Thanks — we got your brief and will reply within one business day.';
+          }
+          if (submitBtn) {
+            submitBtn.innerHTML = 'Sent ✓';
+            setTimeout(function(){
+              submitBtn.innerHTML = originalBtnText;
+              submitBtn.disabled = false;
+            }, 3000);
+          }
+        } else {
+          throw new Error('Submission failed');
+        }
+      })
+      .catch(function(){
+        if (status) {
+          status.hidden = false;
+          status.classList.remove('form-status--success');
+          status.classList.add('form-status--error');
+          status.textContent = 'Something went wrong. Please email contact@nutrapack.co instead.';
+        }
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
