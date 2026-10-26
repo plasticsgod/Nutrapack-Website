@@ -26,7 +26,7 @@
 
     function fallback() {
       var img = document.createElement('img');
-      img.src = o.fallback || 'images/web/lineup.jpg';
+      img.src = o.fallback || 'images/web/tub-sizes.webp';
       img.alt = 'NutraPack tubs in 8, 10, 20, 25 and 55 oz, shown to scale';
       img.className = 'np-fallback';
       stage.appendChild(img);

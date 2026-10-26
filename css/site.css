@@ -545,6 +545,11 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .ftr__legal { color: inherit; opacity: .7; margin-left: 10px; text-decoration: none; } .ftr__legal:hover { opacity: 1; text-decoration: underline; }
 .legal h2 { margin-top: 1.6em; }
 
+/* legible small text on phones (12 px minimum) */
+.tv__code { font-size: 12px; letter-spacing: .12em; }
+@media (max-width: 560px) { .hdr nav a { font-size: 12px; letter-spacing: .02em; padding: 8px 2px; } }
+@media (max-width: 420px) { .hdr .btn { font-size: 12px; letter-spacing: .06em; } .hdr nav a { font-size: 12px; letter-spacing: 0; padding: 8px 2px; } }
+
 /* ---- white concept tweaks ---- */
 .blob { mix-blend-mode: normal; opacity: .22 !important; filter: none !important; scale: 1.7; background: radial-gradient(closest-side, currentColor 0%, currentColor 22%, transparent 100%) !important; } .blob--a { color: #ff5a00; } .blob--b { color: #00b7ff; } .blob--d { color: #39ff88; } .blob--e { color: #9b3dff; } .blob--f { color: #00c8ff; } .blob--g { color: #ff2bd6; } @media (max-width: 760px) { .blob { animation: none !important; } }
 .tv { background: radial-gradient(ellipse at 50% 30%, #ffffff, #ecece9 75%); }
