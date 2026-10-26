@@ -129,6 +129,7 @@
       (preview || bot ? Promise.resolve({ ok: true }) : fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } }))
         .then(function (r) {
           if (!r.ok) throw new Error('failed');
+          if (!bot && window.gtag) gtag('event', 'generate_lead', { form_name: 'quote', page_path: location.pathname });
           form.reset();
           form.querySelectorAll('[data-component-select]').forEach(function (s) { s.dispatchEvent(new Event('change')); });
           if (status) { status.hidden = false; status.classList.add('form-status--success'); status.textContent = 'Thanks, we got your brief. A real person will reply soon.'; }
@@ -175,6 +176,7 @@
       (preview || bot ? Promise.resolve({ ok: true }) : fetch('https://formspree.io/f/xqenoayb', { method: 'POST', body: fd, headers: { Accept: 'application/json' } }))
         .then(function (r) {
           if (!r.ok) throw new Error('send failed');
+          if (!bot && window.gtag) gtag('event', 'generate_lead', { form_name: 'brief', page_path: location.pathname });
           brief.querySelector('[data-step]').hidden = true;
           var done = document.getElementById('bfDone'); done.hidden = false; done.focus();
         })
