@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;family=Barlow+Semi+Condensed:wght@600;700&amp;display=swap">
-<link rel="stylesheet" href="css/site.css?v=20261026">
+<link rel="stylesheet" href="css/site.css?v=20261026b">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -108,7 +108,7 @@
      "name": "How do I get started?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Book a 15-minute call or send a brief. Tell us which SKUs matter most and what you're up against, and a real person replies."
+      "text": "Send a brief at the bottom of this page. Tell us which SKUs matter most and what you're up against, and a real person replies to set up a 15-minute call."
      }
     }
    ]
@@ -278,7 +278,7 @@
   <div class="wrap narrow">
     <div class="head"><span class="kick">How we work</span><h2 class="title title--sm">From first call to every SKU</h2></div>
     <ol class="steps">
-      <li class="step"><span class="step__n">01</span><div><h3>15-minute call</h3><p>Tell us which SKUs matter most and what you're up against.</p></div><dl><dt>Time</dt><dd>15 minutes</dd></dl></li>
+      <li class="step"><span class="step__n">01</span><div><h3><a href="#brief">15-minute call</a></h3><p>Send a brief below: which SKUs matter most and what you're up against. We set up the call.</p></div><dl><dt>Time</dt><dd>15 minutes</dd></dl></li>
       <li class="step"><span class="step__n">02</span><div><h3>Sample kit</h3><p>See and feel the features on real packaging.</p></div><dl><dt>You get</dt><dd>Real samples</dd></dl></li>
       <li class="step"><span class="step__n">03</span><div><h3>Pilot one SKU</h3><p>Start with a neck band, seal or tip-on on your existing line.</p></div><dl><dt>Start</dt><dd>One SKU</dd></dl></li>
       <li class="step"><span class="step__n">04</span><div><h3>Scale with volume</h3><p>Roll the features out across your SKUs on high-volume flexo production.</p></div><dl><dt>Scale</dt><dd>Every SKU</dd></dl></li>
@@ -297,16 +297,46 @@
 <section class="band">
   <div class="wrap narrow">
     <div class="head"><span class="kick">FAQ</span><h2 class="title title--sm">Security feature questions</h2></div>
-    <div class="faq"><details open><summary>What are security features?</summary><p>Protection built into the label, seal or band you already use: tamper-evident VOID materials, micro text, anti-copy patterns and custom holographics, designed around your brand.</p></details><details><summary>Can a counterfeiter copy it?</summary><p>Tier 2 and 3 features are chosen because a scanner or copier can't reproduce them. On a copy the holographic color shift is lost, micro text blurs and anti-copy patterns break apart, so a fake is easier to spot.</p></details><details><summary>Which formats can carry them?</summary><p>Pressure-sensitive labels, neck bands, shrink bands, tamper seals and tip-ons, plus applications like cartons, tubs and spirits bottles.</p></details><details><summary>Do I need to protect every SKU?</summary><p>No. Start with one SKU and add tiers as risk grows.</p></details><details><summary>How do I get started?</summary><p>Book a 15-minute call or send a brief. Tell us which SKUs matter most and what you're up against, and a real person replies.</p></details></div>
+    <div class="faq"><details open><summary>What are security features?</summary><p>Protection built into the label, seal or band you already use: tamper-evident VOID materials, micro text, anti-copy patterns and custom holographics, designed around your brand.</p></details><details><summary>Can a counterfeiter copy it?</summary><p>Tier 2 and 3 features are chosen because a scanner or copier can't reproduce them. On a copy the holographic color shift is lost, micro text blurs and anti-copy patterns break apart, so a fake is easier to spot.</p></details><details><summary>Which formats can carry them?</summary><p>Pressure-sensitive labels, neck bands, shrink bands, tamper seals and tip-ons, plus applications like cartons, tubs and spirits bottles.</p></details><details><summary>Do I need to protect every SKU?</summary><p>No. Start with one SKU and add tiers as risk grows.</p></details><details><summary>How do I get started?</summary><p>Send a brief at the bottom of this page. Tell us which SKUs matter most and what you're up against, and a real person replies to set up a 15-minute call.</p></details></div>
   </div>
 </section>
 
-<section class="final">
-  <div class="wrap">
-    <span class="kick">Real quote · real person</span>
-    <h2 class="title">Protect what you make</h2>
-    <p class="lede">Tell us which SKUs matter most and what you're up against. A real person replies.</p>
-    <div class="ctas" style="justify-content:center"><a class="btn btn--solid" href="contact.html?need=pilot">Start with one SKU →</a><a class="btn" href="/">How it works</a></div>
+<section class="final glow-zone" id="brief">
+  <div class="blob blob--f" aria-hidden="true"></div><div class="blob blob--g" aria-hidden="true"></div>
+  <div class="wrap narrow brief">
+    <div class="brief__copy">
+      <span class="kick">Book a 15-minute call</span>
+      <h2 class="title title--md">Tell us what you're protecting.</h2>
+      <p class="lede">Tell us which SKUs matter most and what you're up against. A real person replies to set up a 15-minute call.</p>
+      <dl class="facts"><div><dt>Email</dt><dd><a href="mailto:contact@nutrapack.co">contact@nutrapack.co</a></dd></div><div><dt>Replies from</dt><dd>A real person</dd></div><div><dt>Orders</dt><dd>One PO</dd></div></dl>
+    </div>
+    <form class="brief__form" id="briefForm" novalidate>
+      <label class="hp" aria-hidden="true">Leave this empty<input type="text" id="bfHp" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+      <div class="bf-step" data-step>
+        <fieldset class="bf-group"><legend>What do you need?</legend>
+          <div class="bf-chips" data-multi>
+            <button type="button" class="gtoggle" aria-pressed="false">Packaging</button><button type="button" class="gtoggle" aria-pressed="false">Labels &amp; stickers</button>
+            <button type="button" class="gtoggle" aria-pressed="false">Shrink sleeves</button><button type="button" class="gtoggle" aria-pressed="true">Security features</button>
+            <button type="button" class="gtoggle" aria-pressed="false">Design help</button><button type="button" class="gtoggle" aria-pressed="false">Not sure yet</button>
+          </div></fieldset>
+        <fieldset class="bf-group"><legend>Quantity</legend>
+          <div class="bf-chips" data-single>
+            <button type="button" class="gtoggle" aria-pressed="false">Under 10k</button><button type="button" class="gtoggle" aria-pressed="false">10k–20k</button>
+            <button type="button" class="gtoggle" aria-pressed="false">20k–50k</button><button type="button" class="gtoggle" aria-pressed="false">50k+</button>
+          </div></fieldset>
+        <div class="bf-row">
+          <label class="gfield"><span>Name</span><input id="bfName" type="text" autocomplete="name" placeholder="Jane Founder"></label>
+          <label class="gfield"><span>Email</span><input id="bfEmail" type="email" autocomplete="email" placeholder="jane@brand.co" required></label>
+        </div>
+        <label class="gfield"><span>Anything we should know? (optional)</span><textarea id="bfNotes" rows="3" placeholder="Product, sizes, colors, deadline…"></textarea></label>
+        <div class="bf-foot"><button type="submit" class="btn btn--solid">Send brief →</button><a class="btn" href="contact.html">Use the full brief form</a><span class="bf-err" id="bfErr" role="alert"></span></div>
+      </div>
+      <div class="bf-done" id="bfDone" hidden tabindex="-1">
+        <span class="bf-check" aria-hidden="true">✓</span>
+        <h3>Brief received.</h3>
+        <p>Thanks. Your account lead will reply with materials, MOQs, lead times and price.</p>
+      </div>
+    </form>
   </div>
 </section>
 </main>
@@ -337,13 +367,13 @@
         <li><a href="https://instagram.com/nutrapack.co" rel="me noopener">Instagram @nutrapack.co</a></li>
       </ul></div>
     </div>
-    <div class="ftr__base"><span>© <span id="year">2026</span> NutraPack LLC. All rights reserved.</span><span>Packaging · Printing · Brand protection</span></div>
+    <div class="ftr__base"><span>© <span id="year">2026</span> NutraPack LLC. All rights reserved. <a class="ftr__legal" href="privacy.html">Privacy</a></span><span>Packaging · Printing · Brand protection</span></div>
   </div>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-<script src="js/np-shared.js?v=20261026" defer></script>
-<script src="js/np-holo.js?v=20261026" defer></script>
-<script src="js/features.js?v=20261026" defer></script>
-<script src="js/site.js?v=20261026" defer></script>
+<script src="js/np-shared.js?v=20261026b" defer></script>
+<script src="js/np-holo.js?v=20261026b" defer></script>
+<script src="js/features.js?v=20261026b" defer></script>
+<script src="js/site.js?v=20261026b" defer></script>
 </body>
 </html>

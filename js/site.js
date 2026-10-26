@@ -125,7 +125,8 @@
       if (btn) { btn.disabled = true; btn.innerHTML = 'Sending…'; }
       if (status) { status.hidden = true; status.className = 'form-status'; }
       var preview = !!document.querySelector('meta[name="np-preview"]');
-      (preview ? Promise.resolve({ ok: true }) : fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } }))
+      var trap = form.querySelector('[name="_gotcha"]'), bot = (trap && trap.value) || performance.now() < 3000;
+      (preview || bot ? Promise.resolve({ ok: true }) : fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } }))
         .then(function (r) {
           if (!r.ok) throw new Error('failed');
           form.reset();
@@ -169,7 +170,9 @@
       fd.append('message', (document.getElementById('bfNotes') || {}).value || '');
       var btn = brief.querySelector('[type="submit"]'); if (btn) btn.disabled = true;
       var preview = !!document.querySelector('meta[name="np-preview"]');
-      (preview ? Promise.resolve({ ok: true }) : fetch('https://formspree.io/f/xqenoayb', { method: 'POST', body: fd, headers: { Accept: 'application/json' } }))
+      var hp = document.getElementById('bfHp'), bot = (hp && hp.value) || performance.now() < 3000;
+      fd.append('_gotcha', hp ? hp.value : '');
+      (preview || bot ? Promise.resolve({ ok: true }) : fetch('https://formspree.io/f/xqenoayb', { method: 'POST', body: fd, headers: { Accept: 'application/json' } }))
         .then(function (r) {
           if (!r.ok) throw new Error('send failed');
           brief.querySelector('[data-step]').hidden = true;
