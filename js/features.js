@@ -2,7 +2,8 @@
    Each tile reacts to pointer tilt (or phone tilt) and gently sways on its own. */
 (function () {
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var DPR = Math.min(2, window.devicePixelRatio || 1);
+  var PHONE = window.innerWidth < 760;
+  var DPR = Math.min(PHONE ? 1.5 : 2, window.devicePixelRatio || 1);
   function rr(x, X, Y, W, H, r) { x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + W, Y, X + W, Y + H, r); x.arcTo(X + W, Y + H, X, Y + H, r); x.arcTo(X, Y + H, X, Y, r); x.arcTo(X, Y, X + W, Y, r); x.closePath(); }
   function rnd(seed) { var s = seed >>> 0; return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
   function hsl(h, s, l, a) { return 'hsla(' + h + ',' + s + '%,' + l + '%,' + (a == null ? 1 : a) + ')'; }
@@ -335,10 +336,24 @@
       lbl.style.transform = 'perspective(800px) rotateY(' + (tl.x * 16) + 'deg) rotateX(' + (-tl.y * 10) + 'deg)';
       lbl.style.setProperty('--gx', (50 + tl.x * 45) + '%');
       paint(cv, x, tl, t);
+      if (el._n = (el._n || 0) + 1, el._n % 3 && el._mDone) return; el._mDone = true;
       minis.forEach(function (m) { var ang = { x: Math.max(-1, Math.min(1, m.off + tl.x * 0.15)), y: tl.y, k: m.k }; m.el.style.transform = 'perspective(400px) rotateY(' + (ang.x * 16) + 'deg)'; m.el.style.setProperty('--gx', (50 + ang.x * 45) + '%'); paint(m.cv, m.x, ang, t); });
     };
   });
-  function loop(now) { requestAnimationFrame(loop); tiles.forEach(function (el) { var b = el.getBoundingClientRect(); if (b.bottom > 0 && b.top < innerHeight) el._draw(now); }); }
+  // Only draw tiles that are on screen, pause while the page is scrolling, and run at 30 fps on phones.
+  var onScreenSet = new Set(), lastScroll = 0, lastFrame = 0;
+  ['scroll', 'touchmove', 'wheel'].forEach(function (e) { window.addEventListener(e, function () { lastScroll = performance.now(); }, { passive: true }); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) onScreenSet.add(e.target); else onScreenSet.delete(e.target); }); }, { rootMargin: '100px 0px' });
+    tiles.forEach(function (el) { io.observe(el); });
+  } else tiles.forEach(function (el) { onScreenSet.add(el); });
+  function loop(now) {
+    requestAnimationFrame(loop);
+    if (now - lastScroll < 220) return;
+    if (PHONE && now - lastFrame < 31) return;
+    lastFrame = now;
+    onScreenSet.forEach(function (el) { el._draw(now); });
+  }
   if (reduce) tiles.forEach(function (el) { el._draw(2000); }); else requestAnimationFrame(loop);
   window.addEventListener('deviceorientation', function (e) { if (e.gamma == null) return; var g = Math.max(-1, Math.min(1, e.gamma / 30)); tiles.forEach(function (el) { el._tilt(g); }); }); // phone tilt drives every tile
 })();

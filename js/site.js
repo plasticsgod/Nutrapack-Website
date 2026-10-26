@@ -20,9 +20,12 @@
 
   // 3D starts only once the page has loaded and the browser is idle, and only when its section is
   // on (or near) screen, so text and buttons are usable first on phones.
+  var lastScroll = 0;
+  ['scroll', 'touchmove', 'wheel'].forEach(function (e) { window.addEventListener(e, function () { lastScroll = performance.now(); }, { passive: true }); });
+  function still(fn) { (function chk() { if (performance.now() - lastScroll < 350) setTimeout(chk, 150); else fn(); })(); }
   function when3D(el, fn) {
     var started = false;
-    function go() { if (started) return; started = true; fn(); }
+    function go() { if (started) return; started = true; still(fn); }
     function idle() { (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(watch, { timeout: 2500 }); }
     function watch() {
       if (!('IntersectionObserver' in window)) return go();
@@ -59,7 +62,7 @@
     function startTicker(fn) {
       if (!phone) return when3D(ticker, fn);
       var done = false, evs = ['pointerdown', 'touchstart', 'scroll', 'keydown', 'wheel'];
-      function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, { passive: true }); }); fn(); setTimeout(function () { if (poster) { poster.style.opacity = '0'; setTimeout(function () { poster.remove(); }, 400); } }, 350); }
+      function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, { passive: true }); }); still(function () { fn(); setTimeout(function () { if (poster) { poster.style.opacity = '0'; setTimeout(function () { poster.remove(); }, 400); } }, 350); }); }
       evs.forEach(function (e) { window.addEventListener(e, go, { passive: true }); });
     }
     startTicker(function () { api = window.NPH.mountTicker({

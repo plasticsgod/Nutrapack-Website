@@ -214,6 +214,14 @@
     });
   }
 
+  // Scroll guard: heavy 3D setup waits until the finger/wheel has been still for a moment
+  var lastScroll = 0;
+  ['scroll', 'touchmove', 'wheel'].forEach(function (e) { window.addEventListener(e, function () { lastScroll = performance.now(); }, { passive: true }); });
+  function scrolling() { return performance.now() - lastScroll < 350; }
+  function whenStill(cb) {
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 120); };
+    (function chk() { if (scrolling()) setTimeout(chk, 150); else idle(function () { if (scrolling()) chk(); else cb(); }, { timeout: 1200 }); })();
+  }
   function makeRenderer(stage) {
     var canvas = document.createElement('canvas');
     canvas.className = 'nph-canvas'; canvas.setAttribute('aria-hidden', 'true');
@@ -387,7 +395,7 @@
     var nextAuto = 0, t0 = performance.now();
     function frame(now) {
       requestAnimationFrame(frame);
-      if (!onScreen(stage)) return;
+      if (!onScreen(stage) || scrolling()) return;
       last = now;
       var t = (now - t0) / 1000;
       if (!nextAuto) nextAuto = now + 2600;
@@ -716,15 +724,16 @@
       g.visible = true; try { renderer.compile(scene, camera); } catch (e) {} g.visible = false;
       return g;
     }
-    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 250); };
-    function buildRest(i) { if (i >= specs.length) return; idle(function () { build(i); buildRest(i + 1); }, { timeout: 1500 }); }
+    function buildRest(i) { if (i >= specs.length) return; whenStill(function () { build(i); buildRest(i + 1); }); }
     build(0); buildRest(1);
 
     var cur = 0, prev = -1, tickAt = 0, DUR = 420, t0 = performance.now();
     items[0].visible = true;
     if (o.onTick) o.onTick(0);
     function tick(now) {
-      prev = cur; cur = (cur + 1) % items.length; tickAt = now;
+      var nx = (cur + 1) % items.length;
+      if (!items[nx] && scrolling()) return; // never build mid-scroll; switch on the next tick
+      prev = cur; cur = nx; tickAt = now;
       build(cur).visible = true;
       if (o.onTick) o.onTick(cur);
     }
@@ -738,7 +747,7 @@
       requestAnimationFrame(frame);
       if (!paused && Date.now() >= next) { next += period; if (Date.now() > next) next = Math.ceil(Date.now() / period) * period; tick(now); }
       if (o.onProgress) o.onProgress(paused ? 0 : 1 - (next - Date.now()) / period);
-      if (!onScreen(stage)) return;
+      if (!onScreen(stage) || scrolling()) return;
       var t = (now - t0) / 1000, k = clamp((now - tickAt) / DUR, 0, 1);
       holos.forEach(function (m) { m.uniforms.uTime.value = t; });
       tickers[cur].forEach(function (f) { f(t); });
