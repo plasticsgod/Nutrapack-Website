@@ -366,8 +366,8 @@
     lgeo.translate(0, 0, -0.0525);
     var lmat = holoMaterial([-LW / 2, -LH / 2, LW, LH]), lt = labelTextures(); lmat.uniforms.uTex.value = lt.orig; lmat.uniforms.uCopy.value = lt.copy;
     shapes.label = { obj: new THREE.Mesh(lgeo, [lmat, edge]), box: [-LW / 2, -LH / 2, LW, LH], orbit: function (a) { var c = 0.5 + 0.5 * Math.sin(a * 0.8); return [0.16 + c * 0.68, 0.135]; } };
-    // tamper strip over a carton seam
-    shapes.strip = { obj: cartonWithStrip(), box: null, orbit: null };
+    // tamper strip over the lid seam of a 10 oz tub
+    shapes.strip = { obj: tubWithStrip(), box: null, orbit: null };
 
     var group = new THREE.Group(); scene.add(group);
     Object.keys(shapes).forEach(function (k) { var s = shapes[k]; s.mats = []; s.obj.traverse(function (m) { if (m.material) [].concat(m.material).forEach(function (x) { if (x.uniforms && x.uniforms.uTime) s.mats.push(x); }); }); s.obj.visible = false; group.add(s.obj); });
@@ -421,6 +421,39 @@
   function std(color, rough, metal) { return new THREE.MeshPhysicalMaterial({ color: new THREE.Color(color).convertSRGBToLinear(), roughness: rough == null ? 0.5 : rough, metalness: metal || 0, clearcoat: 0.2, clearcoatRoughness: 0.6 }); }
   function canvasTex(w, h, draw) { var c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); var t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = 8; return t; }
 
+  // 10 oz tub (60 mm) with a holographic tamper strip across the lid and down over the lid seam on both sides.
+  // The strip is wrapped onto the tub's surface of revolution, so every edge sits on the plastic (nothing floats or stretches).
+  function tubWithStrip() {
+    var g = new THREE.Group();
+    var r = 31 * MM, bh = 96 * MM, lh = 17 * MM, c = Math.min(r * 0.05, bh * 0.03), tc = Math.min(r * 0.06, lh * 0.18);
+    var m = std('#0a0a0a', 0.5);
+    g.add(new THREE.Mesh(lathe([[0, 0], [r - c, 0], [r - c * .5, c * .5], [r, c], [r, bh - c], [r - c * .3, bh]], 160), m));
+    var lid = new THREE.Mesh(lathe([[r, 0], [r, lh - tc], [r - tc * .5, lh - tc * .3], [r - tc, lh]], 160), m); lid.position.y = bh + 0.003; g.add(lid);
+    var top = new THREE.Mesh(new THREE.CircleGeometry(r - tc, 160), m); top.rotation.x = -Math.PI / 2; top.position.y = bh + lh + 0.004; g.add(top);
+    var part = new THREE.Mesh(new THREE.CylinderGeometry(r * .998, r * .998, 0.005, 160, 1, true), new THREE.MeshBasicMaterial({ color: 0 })); part.position.y = bh + 0.0015; g.add(part);
+    // strip centre line in the x = 0 plane: (z, y) from the back of the body, up, across the lid, down the front
+    var e = 0.0035, R = r + e, T = bh + lh + 0.004 + e, drop = 26 * MM, pts = [];
+    function push(z, y, top) { pts.push([z, y, top]); }
+    for (var y = bh - drop; y < T - tc; y += 0.04) push(-R, y, 0);
+    for (var a = 0; a <= 1.0001; a += 0.125) { var an = a * Math.PI / 2; push(-(R - tc) - tc * Math.cos(an), T - tc + tc * Math.sin(an), 0); }
+    for (var z = -(r - tc) + 0.04; z < (r - tc) - 0.02; z += 0.04) push(z, T, 1);
+    for (var a2 = 0; a2 <= 1.0001; a2 += 0.125) { var an2 = a2 * Math.PI / 2; push((R - tc) + tc * Math.sin(an2), T - tc + tc * Math.cos(an2), 0); }
+    for (var y2 = T - tc - 0.04; y2 >= bh - drop; y2 -= 0.04) push(R, y2, 0);
+    var W = 15 * MM, nu = 12, pos = [], uv = [], idx = [], len = [0];
+    for (var i = 1; i < pts.length; i++) len.push(len[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    var L = len[len.length - 1];
+    pts.forEach(function (p, i) {
+      var rho = Math.abs(p[0]), sg = p[0] < 0 ? -1 : 1;
+      for (var u = 0; u <= nu; u++) {
+        var x = (u / nu - .5) * W, zz = p[2] ? p[0] : sg * Math.sqrt(Math.max(rho * rho - x * x, 0));
+        pos.push(x, p[1], zz); uv.push(u / nu * W, L - len[i]);
+      }
+    });
+    for (var j = 0; j < pts.length - 1; j++) for (var k = 0; k < nu; k++) { var A = j * (nu + 1) + k, B = A + nu + 1; idx.push(A, B, A + 1, B, B + 1, A + 1); }
+    var sgeo = new THREE.BufferGeometry(); sgeo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); sgeo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); sgeo.setIndex(idx); sgeo.computeVertexNormals();
+    g.add(new THREE.Mesh(sgeo, holoStripMaterial(W, W * 2, L)));
+    var out = normalize(g, 2.55); out.rotation.set(0.42, 0.12, 0); return out;
+  }
   function makeTub() {
     var g = new THREE.Group();
     var r = 44.5 * MM, bh = 92 * MM, lh = 15 * MM, c = Math.min(r * 0.05, bh * 0.03), tc = Math.min(r * 0.04, lh * 0.15);
