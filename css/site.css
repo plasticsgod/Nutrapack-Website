@@ -542,7 +542,7 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 
 /* spam trap (hidden from people) + discreet legal link */
 .hp { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
-.ftr__legal { color: inherit; opacity: .7; margin-left: 10px; text-decoration: none; } .ftr__legal:hover { opacity: 1; text-decoration: underline; }
+.ftr__legal { color: inherit; margin-left: 10px; text-decoration: underline; text-underline-offset: 2px; } .ftr__legal:hover { text-decoration-thickness: 2px; }
 .legal h2 { margin-top: 1.6em; }
 
 /* legible small text on phones (12 px minimum) */
@@ -564,3 +564,20 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .full .wrap, .full .title, .full .lede { color: #0b0b0c; }
 .post-cta::before, .pillars .pillar:nth-child(3)::before { opacity: .5; }
 .pillar, .card, .tier, .post-card, .step-g, .brief__form { box-shadow: inset 0 0 0 1px rgba(0,0,0,.09), 0 18px 40px rgba(0,0,0,.06); }
+
+/* home: the blog section shows as one line (markup unchanged so Alfred's updates keep working) */
+#blog { padding: 0 !important; }
+#blog > .wrap { padding-top: 34px !important; padding-bottom: 34px !important; display: flex !important; flex-direction: row !important; justify-content: flex-start !important; align-items: center !important; flex-wrap: wrap; gap: 10px 22px; text-align: left; }
+#blog .head-row, #blog .head { display: contents; }
+#blog .head-row .kick { margin: 0; white-space: nowrap; }
+#blog .head-row h2 { display: none; }
+#blog .posts { display: block !important; flex: 1 1 320px; min-width: 0; margin: 0 !important; height: auto !important; min-height: 0 !important; grid-template-columns: none !important; }
+#blog .post-card { display: none; background: none; box-shadow: none; padding: 0; border: 0; transform: none; }
+#blog .post-card:first-child { display: block; }
+#blog .post-card__img, #blog .post-card .kick, #blog .post-card__d, #blog .post-card__go { display: none !important; }
+#blog .post-card__body { padding: 0; }
+#blog .post-card__t { margin: 0; font: 600 18px/1.35 var(--sans, inherit); text-transform: none; letter-spacing: 0; }
+#blog .post-card:hover .post-card__t { text-decoration: underline; }
+#blog .post-card__t::after { content: " →"; }
+#blog .posts-more { display: inline-block !important; background: none !important; color: inherit !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; min-height: 0 !important; margin: 0 !important; font: 600 15px/1.3 var(--sans, inherit) !important; text-transform: none !important; letter-spacing: 0 !important; white-space: nowrap; opacity: .72; text-decoration: none; }
+#blog .posts-more:hover { opacity: 1; text-decoration: underline; }
